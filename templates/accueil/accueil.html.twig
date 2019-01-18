@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Accueil BDE' %}
+
+{% block body %}
+
+    <style>
+        .redirection {
+            width: 50%;
+            background-size: cover;
+        }
+        div#slider {
+            width: 100%;
+            max-width: 1500px;
+            overflow: hidden;
+        }
+
+        div#slider figure {
+            position: relative;
+            width: 500%;
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            left: 0;
+            text-align: left;
+            animation: 30s slidy infinite;
+        }
+
+        div#slider figure img {
+            width: 20%;
+            height: 500px;
+            float: left;
+        }
+        @keyframes slidy {
+            0% { left: 0%; }
+            20% { left: 0%; }
+            25% { left: -100%; }
+            45% { left: -100%; }
+            50% { left: -200%; }
+            70% { left: -200%; }
+            75% { left: -300%; }
+            95% { left: -300%; }
+            100% { left: -400%; }
+        }
+
+    </style>
+
+
+    <div class = "jumbotron" >
+        <span>
+            <p style="float: left; margin-right: auto">
+                <img src="Images/Logo-BDE.png"  width="30%">
+            </p>
+        </span>
+        <span >
+            <p>
+                <h1>BDE du Cesi Toulouse</h1>
+            </p>
+        </span>
+    </div>
+
+    <div id="slider">
+        <figure id="accueil">
+            <img src="/Images/Caroussel/bar.jpg"  alt>
+            <img src="/Images/Caroussel/foot.jpg" alt>
+            <img src="/Images/Caroussel/wei.png" alt>
+            <img src="/Images/Caroussel/cesiades.png"  alt>
+        </figure>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+    <div>
+
+        <h1 style="color: white; text-align: center"> Voir nos différentes rubriques</h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row" >
+            <span class="redirection card text-white bg-dark col-lg-4" >
+                <a href="boutique"><button style="background-color: white; "><img class=" card-img-top" src="Images/Logo-boutique.png" ></button></a>
+                <div class="card-body">
+                    <h5 class="card-title">Boutique</h5>
+                    <p class="card-text">La boutique officielle du BDE Cesi Toulouse tenue par le Capitaur.</p>
+                </div>
+            </span>
+
+            <span class="redirection card text-white bg-dark col-lg-4" >
+                <a href="/events"><button style="background-color: white; "><img class=" card-img-top" src="Images/Logo-event.png" ></button></a>
+                <div class="card-body">
+                    <h5 class="card-title">Évenements</h5>
+                    <p class="card-text">Renseignez vous sur les différents évenements proposés par votre BDE. Inscrivez vous ou regardez les photos liées à chaque évenements.</p>
+                </div>
+             </span>
+
+            <span class="redirection card text-white bg-dark col-lg-4" >
+                <a href="/boite_a_idee"><button style="background-color: white; "><img class=" card-img-top" src="Images/Logo-boite.png" ></button></a>
+                <div class="card-body">
+                    <h5 class="card-title">Boîte à Idées</h5>
+                    <p class="card-text">Si vous avez des idées d'évenements, c'est ici que vous pouvez les soumettre.</p>
+                </div>
+             </span>
+
+
+        </div>
+    </div>
+
+    <footer style="background-color: black;">
+        <div class="container">
+            <div class="row">
+                <li style=" color: black">
+                    <a href="https://www.cesi.fr/politique-de-confidentialite/">Politique de Protection des Données Personnelles</a>
+                </li>
+                <li style=" color: black">
+                    <a href="https://www.cesi.fr/mentions-legales/">Mentions légale</a>
+                </li>
+
+                <li style=" color: black">
+                    <a href="https://www.cesi.fr/credits/#">@Cesi 2018</a>
+                </li>
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}
+
+
