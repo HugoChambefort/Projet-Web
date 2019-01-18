@@ -1,50 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Boîte à idées' %}
+{% block title 'Agence Immobilier Michel' %}
 
 {% block body %}
+    <style>
+        .description{
+            width:60%; height: 100px;
+        }
+        .txtnav{
+            color: #ffffff;
+        }
+        .idees{
+            width: 18rem;
+        }
+    </style>
     <div class = "container jumbotron text-center" >
         <h1>Boîte à Idées</h1><br>
-        <input style="float:left" type="button" value="Nouvelle idée" onclick="hideAddIdea()">
-        <div style="background-color: rgb(203, 206, 209); padding: 50px; padding-left: 50px;
-	        padding-right: 50px;" id="hide">
-            <textarea id="desciption" name="message" style="width:60%; height: 100px;"></textarea><br>
-            <input type="submit" name="submit" onclick="addIdea();">
-        </div>
-
-        
-        <div>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-dark p-4">
+                    <input type="text" placeholder="Titre de votre idée" id="title" name="title"  required
+                           size="30"><br><br>
+                    <textarea class="description" placeholder="Description de votre idée" id="desciption" name="message"></textarea><br>
+                    <input type="submit" name="submit" onclick="addIdea();">
                 </div>
             </div>
+            <nav class="navbar navbar-dark bg-dark">
+                <h2 class="txtnav">Nouvelle idée</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="navbar-toggler-icon"></div>
+                </button>
+            </nav><br>
         </div>
+
+        <span class="idees"></span>
 
     </div>
 
+
     <script>
-        var hide = true;
-        document.getElementById('hide').style.visibility = 'hidden';
-        function hideAddIdea()
-        {
-            if(hide){
-                document.getElementById('hide').style.visibility='visible';
-                hide = false;
-            }else {
-                document.getElementById('hide').style.visibility = 'hidden';
-                hide = true;
-            }
-        }
+
+
 
         function addIdea()
         {
+            var id = 1; //id_idee
+            var titre = document.getElementById("title").value;
             var description = document.getElementById("desciption").value;
-            alert(description);
+            $("span").prepend("<div class=\"card\" ><div class=\"card-body\"><h5 class=\"card-title\">" + titre + "</h5><p class=\"card-text\">" + description + "</p><button onclick='addLike(" + id + ")'  class=\"btn btn-primary\">Voter pour cette idée</button></div></div>");
+        }
 
+        function addLike(id) {
+            alert(id);
+            //add like to idea with id_idee = id
         }
 
     </script>
