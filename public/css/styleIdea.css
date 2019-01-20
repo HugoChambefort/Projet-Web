@@ -1,0 +1,41 @@
+.description{
+    width:70%;
+    height: 100px;
+}
+.txtnav{
+    color: #ffffff;
+}
+.scroll{
+    padding: 1%;
+    background-color: #fffaea;
+    width: 100%;
+    height: 200px;
+    overflow: scroll;
+}
+#uncomplete{
+    color: #AA3333;
+}
+@media (min-width: 768px) {
+    .idee {
+        width:100%;
+        height:320px;
+        padding-bottom: 1%;
+        display:block;
+    }
+}
+@media (min-width: 992px) {
+    .idee {
+        width:50%;
+        height:320px;
+        padding-bottom: 1%;
+        display:inline-block;
+    }
+}
+@media (min-width: 1200px) {
+    .idee {
+        width:50%;
+        height:320px;
+        padding-bottom: 1%;
+        display:inline-block;
+    }
+}
