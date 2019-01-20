@@ -5,55 +5,100 @@
 {% block body %}
     <style>
         .description{
-            width:60%; height: 100px;
+            width:70%;
+            height: 100px;
         }
         .txtnav{
             color: #ffffff;
         }
-        .idees{
-            width: 18rem;
+        .scroll{
+            padding: 1%;
+            background-color: #fffaea;
+            width: 100%;
+            height: 200px;
+            overflow: scroll;
+        }
+        @media (min-width: 768px) {
+            .idee {
+                width:100%;
+                height:320px;
+                padding-bottom: 1%;
+                display:block;
+            }
+        }
+        @media (min-width: 992px) {
+            .idee {
+                width:50%;
+                height:320px;
+                padding-bottom: 1%;
+                display:inline-block;
+            }
+        }
+        @media (min-width: 1200px) {
+            .idee {
+                width:50%;
+                height:320px;
+                padding-bottom: 1%;
+                display:inline-block;
+            }
         }
     </style>
+
     <div class = "container jumbotron text-center" >
         <h1>Boîte à Idées</h1><br>
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-dark p-4">
+                <form class="bg-dark p-4" id="myForm">
                     <input type="text" placeholder="Titre de votre idée" id="title" name="title"  required
                            size="30"><br><br>
                     <textarea class="description" placeholder="Description de votre idée" id="desciption" name="message"></textarea><br>
                     <input type="submit" name="submit" onclick="addIdea();">
-                </div>
+                </form>
             </div>
             <nav class="navbar navbar-dark bg-dark">
                 <h2 class="txtnav">Nouvelle idée</h2>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" onclick="reset();" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <div class="navbar-toggler-icon"></div>
                 </button>
             </nav><br>
         </div>
-
-        <span class="idees"></span>
-
     </div>
-
+    <div class="container text-center idees"></div>
 
     <script>
-
-
-
+        if(window.addEventListener){
+            window.addEventListener('load', initIdees, false);
+        }else{
+            window.attachEvent('onload', initIdees);
+        }
+        function initIdees(){
+            var idees = [[1, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."],
+                [2, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."],
+                [3, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."],
+                [4, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."],
+                [5, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."],
+                [6, "titre exemple", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."]];
+            for(var i = 0; i < 6; i++)
+            {
+                displayIdee(idees[i][0], idees[i][1], idees[i][2]);
+            };
+        }
+        function displayIdee(id, title, description){
+            $(".idees").prepend("<div class=\"card idee\" ><div class=\"card-body\n\"><h5 class=\"card-title\">" + title + "</h5><p class=\"card-text scroll\">" + description + "</p><button  onclick=addLike(" + id + ")  class=\"btn btn-primary\">Voter pour cette idée</button></div></div>");
+        }
+        function reset()
+        {
+            document.getElementById("myForm").reset(); //reset form
+        }
         function addIdea()
         {
             var id = 1; //id_idee
-            var titre = document.getElementById("title").value;
-            var description = document.getElementById("desciption").value;
-            $("span").prepend("<div class=\"card\" ><div class=\"card-body\"><h5 class=\"card-title\">" + titre + "</h5><p class=\"card-text\">" + description + "</p><button onclick='addLike(" + id + ")'  class=\"btn btn-primary\">Voter pour cette idée</button></div></div>");
+            displayIdee(id, document.getElementById("title").value, document.getElementById("desciption").value);
+            reset();
         }
-
         function addLike(id) {
-            alert(id);
-            //add like to idea with id_idee = id
+            //add like to idea with id_idee = id in bdd
+            //rendre le boutton noncliquable
         }
-
     </script>
 {% endblock %}
