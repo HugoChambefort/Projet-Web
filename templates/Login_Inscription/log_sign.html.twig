@@ -2,59 +2,12 @@
 
 {% block title 'Inscription/Connexion' %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset ('css/styleLog.css') }} ">
+{% endblock %}
 
 {% block body %}
-    <style>
-        .container {
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                width: 750px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                width: 970px;
-            }
-            .left{
-                float:left;
-                margin-left: 20%;
-                height: 100%;
-                padding-right: 3%;
-                border-right: 2px solid #222222;
-            }
-            .right{
-                float:right;
-                margin-right: 20%;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                width: 1170px;
-            }
-            .left{
-                float:left;
-                margin-left: 15%;
-                height: 100%;
-                padding-right: 13%;
-                border-right: 2px solid #222222;
-            }
-            .right{
-                float:right;
-                margin-right: 15%;
-            }
-        }
-    </style>
-
-    <div class="container jumbotron text-center ">
+    <div class="container jumbotron text-center">
         <div class="left">
             <h1>Connexion</h1><br><br>
             <input type="text" placeholder="Nom" id="nameC" name="name"  required
@@ -108,32 +61,8 @@
             <input type="submit" name="button" onclick="getUserInfoI();"><br><br>
         </div>
     </div>
+{% endblock %}
 
-        <script>
-            function getUserInfoC()
-            {
-                var userC = [];
-                userC[0] = document.getElementById("nameC").value;
-                userC[1] = document.getElementById("firstNameC").value;
-                userC[2] = document.getElementById("passwordC").value;
-                for (var x=0; x<3;x++){
-                    alert(userC[x]);
-                }
-            }
-
-            function getUserInfoI()
-            {
-                var userI = [];
-                userI[0] = document.getElementById("nameI").value;
-                userI[1] = document.getElementById("firstNameI").value;
-                userI[2] = document.getElementById("emailI").value;
-                userI[3] = document.getElementById("localisationI").value;
-                userI[4] = document.getElementById("passwordI").value;
-                for (var x=0; x<5;x++){
-                    alert(userI[x]);
-                }
-            }
-
-        </script>
-
+{% block javascripts %}
+    <script src="{{ asset ('js/scriptLog.js') }} "></script>
 {% endblock %}
