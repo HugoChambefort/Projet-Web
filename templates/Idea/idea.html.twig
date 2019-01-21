@@ -9,21 +9,7 @@
 {% block body %}
     <div class = "container jumbotron text-center" >
         <h1>Boîte à Idées</h1><br>
-        <div class="pos-f-t">
-            <div class="collapse" id="navbarToggleExternalContent">
-                <form class="bg-dark p-4" id="myForm">
-                    <input type="text" placeholder="Titre de votre idée" id="title" name="title" size="30"><div id="uncomplete"></div><br>
-                    <textarea class="description" placeholder="Description de votre idée" id="desciption" name="message"></textarea><br>
-                    <input type="button" name="submit" value="Ajouter une idée" onclick="addIdea();">
-                </form>
-            </div>
-            <nav class="navbar navbar-dark bg-dark">
-                <h2 class="txtnav">Nouvelle idée</h2>
-                <button class="navbar-toggler" onclick="reset();" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <div class="navbar-toggler-icon"></div>
-                </button>
-            </nav><br>
-        </div>
+        <div id="formulaire"></div>
     </div>
     <div class="container text-center idees"></div>
 
