@@ -17,16 +17,10 @@ if(window.addEventListener){
 }
 
 function initIdees(){
-    /*var now = new Date();
-    alert(now);
-    var month = (now.getMonth() + 1);
-    var day = now.getDate();
-    if (month < 10)
-        month = "0" + month;
-    if (day < 10)
-        day = "0" + day;
-    var today = day + '-' + month + '-' + now.getFullYear();
-    alert(today);*/
+    /**
+     * display "add idea" form to student and cesi
+     * display all ideas from bdd
+     */
     displayForm();
     for(var i = 0; i < idees.length; i++)
     {
@@ -39,18 +33,26 @@ function initIdees(){
 
 function displayIdee(id, title, description){
     var button;
-
+    /**
+     * shoose button to like an idea or change an idea to event
+     */
     if (role == "bde"){
-        button = "onclick=selectEvent(" + id + ")  class=\"btn btn-primary like txtbtn\">Choisir cette idée pour un évenement";
+        button = "onclick=selectEvent(" + id + ")  class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a>";
     }else {
         button = "onclick=addLike(" + id + ")  class=\"btn btn-primary like\">Voter pour cette idée";
     }
 
+    /**
+     * display idea
+     */
     $(".idees").prepend("<div class=\"card idee\" id=" + id + "-" + id +" ><div class=\"card-body\n\"><h5 class=\"card-title\">" + title + "</h5><p class=\"card-text scroll\">" + description + "</p><button id=\'" + id + "\' " + button + "</button></div></div>");
 
 }
 
 function displayForm(){
+    /**
+     * add "add idea" form to student and cesi
+     */
     if (role == "student"){
         $("#formulaire").prepend("<div class=\"pos-f-t\">\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
@@ -70,15 +72,19 @@ function displayForm(){
     }
 }
 function displayFormBde(id){
+    /**
+     * display "add event" form to bde
+     */
 
     if (role == "bde"){
         $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
-            "                    <form class=\"bg-dark p-4\" id=\"myForm uncomplete\">\n" +
+            "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
+            "                        <div id='uncomplete'></div>" +
             "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + idees[id][1] + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
             "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + idees[id][2] + "</textarea><br><br>\n" +
             "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
-            "                        <input type=\"file\" name=\"myFile\"><br><br>" +
+            "                        <input type=\"file\" name=\"myFile\" style='color: #ffffff'><br><br>" +
             "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id + ");\">\n" +
             "                    </form>\n" +
             "                </div>\n" +
@@ -94,17 +100,29 @@ function displayFormBde(id){
 
 function reset()
 {
+    /**
+     * reset form
+     */
     document.getElementById("myForm").reset(); //reset form
 }
 
 function addIdea()
 {
     if(document.getElementById("title").value){
+        /**
+         * remove error message
+         * display new idea
+         * add idea in bdd
+         * reset form
+         */
         $("#uncomplete").empty();
         var id = 1; //id_idee
         displayIdee(id, $("#title").value, $("#description").value);
         reset();
     }else{
+        /**
+         * display error message
+         */
         $("#uncomplete").empty();
         $("#uncomplete").prepend("Vous devez entrer un titre.");
     }
@@ -112,6 +130,11 @@ function addIdea()
 }
 
 function addLike(id) {
+    /**
+     * change like button to disable
+     * add like in bdd
+     * @type {boolean}
+     */
     document.getElementById(id).disabled = true;
     //idees[id][3] = true;
     //add like to idea with id_idee = id in bdd
@@ -120,11 +143,26 @@ function addLike(id) {
 
 function addEvent(id) {
 
-    if(document.getElementById("title").value && document.getElementById("description").value && document.getElementById("date").value){
 
+
+
+    if(document.getElementById("title").value && document.getElementById("description").value && document.getElementById("date").value){
+        /**
+         * get values
+         */
+        document.getElementById("title").value;
+        document.getElementById("description").value;
+        document.getElementById("date").value;
+
+        /**
+         * remove idea and form
+         */
         document.getElementById(id + "-" + id).remove();
         document.getElementById("form" + id).remove();
     }else{
+        /**
+         * display error message
+         */
         $("#uncomplete").empty();
         $("#uncomplete").prepend("Vous devez entrer un titre, une description, et une date.");
     }
@@ -132,8 +170,9 @@ function addEvent(id) {
 
 }
 function selectEvent(id) {
-
+    /**
+     * display form with idea values
+     */
     $("#formulaire").empty();
-
     displayFormBde(id);
 }

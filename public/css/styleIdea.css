@@ -15,13 +15,17 @@
     height: 200px;
     overflow: scroll;
 }
+a, a:hover{
+    color: #ffffff;
+}
+
 #uncomplete{
-    color: #AA3333;
+    color: #ff0000;
 }
 @media (min-width: 768px) {
     .idee {
         width:100%;
-        height:30px;
+        height:350px;
         padding-bottom: 1%;
         display:block;
     }
@@ -29,15 +33,15 @@
 @media (min-width: 992px) {
     .idee {
         width:50%;
-        height:320px;
+        height:350px;
         padding-bottom: 1%;
-        display:inline-block;
+        display:block;
     }
 }
 @media (min-width: 1200px) {
     .idee {
         width:50%;
-        height:320px;
+        height:350px;
         padding-bottom: 1%;
         display:inline-block;
     }

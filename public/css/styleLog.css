@@ -5,6 +5,10 @@
     margin-left: auto;
 }
 
+.errorMessage{
+    color: #ff0000;
+}
+
 @media (min-width: 768px) {
     .container {
         width: 750px;
