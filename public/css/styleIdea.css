@@ -35,7 +35,7 @@ a, a:hover{
         width:50%;
         height:350px;
         padding-bottom: 1%;
-        display:block;
+        display:inline-block;
     }
 }
 @media (min-width: 1200px) {
