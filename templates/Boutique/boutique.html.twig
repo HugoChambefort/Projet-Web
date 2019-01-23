@@ -2,19 +2,85 @@
 
 {% block title 'Boutique BDE' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset ('css/styleBoutique.css') }} ">
+{% endblock %}
 
 {% block body %}
+    
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <div class = "jumbotron text-center" >
-        <h1>Boutique
-        </h1>
 
-        <p>
-            Michel c'est le brésil !!!
-        </p>
+
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="rightMenu">
+  <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    <h1 class="titrePanier">Votre Panier</h1>
+    <div class="total"></div>
+    <div class="panier"></div>
+</div>
+
+<div class="">
+  <button class="w3-button w3-grey w3-xxlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+</div>
+
+
+    <div class="ventesDeLaSemaine">
+        <h1 class="titreM">Meilleurs ventes de la semaine</h1>
+
+        <div class = "imagesDeLaSemaine">
+            <div class="description">
+                <img src="http://placehold.it/200x200" alt="First img">
+                <p id="NomArticleSemaine">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+            <div class="description">
+                <img src="http://placehold.it/200x200" alt="Second img">
+                <p id="NomArticleSemaine">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>    
+            <div class="description">
+                <img src="http://placehold.it/200x200" alt="Third img">
+                <p id="NomArticleSemaine">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+        </div>
     </div>
 
-    <div class = "container" >
+    <div class="articleAV">
+        <div class="imgAV test">
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+                <button onclick="addPannier()">Acheter</button>
+            </div>
 
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: lor Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+
+            <div class="imgText">
+                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
+                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
+            </div>
+        </div>
+            
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset ('js/scriptBoutique.js') }}"></script>
 {% endblock %}
