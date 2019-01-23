@@ -1,0 +1,128 @@
+
+/* *************************************Sidebar Panier********************************** */
+    .titrePanier{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 3%;
+    }
+
+    .total{
+        margin-left: 2%;
+    }
+    
+    .itemPanier{
+        display: flex;
+        justify-content: space-around;
+        margin-left: 2%;
+    }
+
+    .boutonSupp{
+        height: 3%;
+        align-self: flex-end;
+    }
+
+    #rightMenu{
+        width:25%;
+        display:none;
+        right:0;
+        background:pink;
+    }
+    
+    /* ******************************Meilleurs ventes de la semaine************************* */
+    
+    .ventesDeLaSemaine{
+        display: flex;
+        flex-direction: column;
+        height: 500px; 
+    }
+    .imagesDeLaSemaine{    
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .titreM{
+        margin: 2%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .description{
+        margin: 2%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+    /* ******************************Tous les articles en ventes**************************** */
+
+    @media (min-width: 1050px) {
+       .articleAV {
+           display: flex;
+            width: 1400px;
+            height: auto;
+            border: solid;
+            margin-left: 5.4%;
+            margin-top: 4%
+       }
+       .imgAV{
+            margin: 2%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+    
+        #aVendre{
+            margin-bottom: 2%;
+        }
+
+        .NomArticle{
+            width: 300px;
+                
+            }
+
+        #NomArticleSemaine{
+            width: 200px;
+            }
+
+        }
+
+    @media (max-width: 1050px) {
+        .articleAV /* La plus grosse div */ {
+            width: 90%;
+            height:auto;
+            border: solid;
+            margin-left: 1.7%;
+        }
+        .imgAV{
+            margin: 2%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+
+        #aVendre{
+            margin-bottom: 2%;
+        }
+            
+        #NomArticle{
+            width: 300px;
+        }
+            
+        #NomArticleSemaine{
+            width: 200px;
+        }
+  
+    }
+        .imgText{
+            margin-bottom: 2%;
+        }
+    
+    /* Ordre de taille des divs
+    
+        articleAV
+        
+            imgAV test
+
+                imgText
+    
+    */
