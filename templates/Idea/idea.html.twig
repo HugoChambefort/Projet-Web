@@ -7,14 +7,61 @@
 {% endblock %}
 
 {% block body %}
+
+
     <div class = "container jumbotron text-center" >
-        <h1>Boîte à Idées</h1><br>
+        <div id="demo"></div>
+
+        <h1 id="top">Boîte à Idées</h1><br>
         <div id="formulaire"></div>
     </div>
     <div class="container text-center idees"></div>
 
+
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+         var id = 0;
+        function initIdees(){
+            /**
+             * display "add idea" form to student and cesi
+             * display all ideas from bdd
+             */
+            displayForm();
+            {%  for entry in idees %}
+            displayIdee("{{ entry[0] }}", "{{ entry[1] }}", "{{ entry[2] }}");
+            if(role == "Etudiant"){
+                document.getElementById("{{ entry[0] }}").disabled = "{{ entry[3] }}";
+            }
+            {%  endfor %}
+        }
+        function lastId(){
+            /**
+             * found last id
+             */
+            id = {{  idees|length }};
+            return id;
+        }
+        function getTitleById(id){
+            var titre = "description exemple";
+            {%  for entry in idees %}
+            if (id == "{{ entry[0] }}") {
+                titre = "{{ entry[1] }}";
+            }
+            {%  endfor %}
+            return titre
+        }
+         function getDescriptionById(id){
+            var description = "description exemple";
+             {%  for entry in idees %}
+             if (id == "{{ entry[0] }}") {
+                 description = "{{ entry[2] }}";
+             }
+             {%  endfor %}
+             return description
+         }
+
+    </script>
     <script src="{{ asset ('js/scriptIdea.js') }} "></script>
 {% endblock %}

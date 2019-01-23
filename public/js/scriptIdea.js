@@ -1,14 +1,6 @@
-
-var role = "bde";
-
-
-var idees = [[0, "titre exemple 0", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", false],
-    [1, "titre exemple 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", false],
-    [2, "titre exemple 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true],
-    [3, "titre exemple 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", false],
-    [4, "titre exemple 4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", true],
-    [5, "titre exemple 5", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", false]];
-
+var role = "Etudiant";
+var userId = 52;
+var id = lastId();
 
 if(window.addEventListener){
     window.addEventListener('load', initIdees, false);
@@ -16,27 +8,12 @@ if(window.addEventListener){
     window.attachEvent('onload', initIdees);
 }
 
-function initIdees(){
-    /**
-     * display "add idea" form to student and cesi
-     * display all ideas from bdd
-     */
-    displayForm();
-    for(var i = 0; i < idees.length; i++)
-    {
-        displayIdee(idees[i][0], idees[i][1], idees[i][2]);
-        if (role == "student") {
-            document.getElementById(idees[i][0]).disabled = idees[i][3];
-        }
-    };
-}
-
 function displayIdee(id, title, description){
     var button;
     /**
      * shoose button to like an idea or change an idea to event
      */
-    if (role == "bde"){
+    if (role == "BDE"){
         button = "onclick=selectEvent(" + id + ")  class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a>";
     }else {
         button = "onclick=addLike(" + id + ")  class=\"btn btn-primary like\">Voter pour cette idée";
@@ -53,11 +30,12 @@ function displayForm(){
     /**
      * add "add idea" form to student and cesi
      */
-    if (role == "student"){
+    if (role == "Etudiant"){
         $("#formulaire").prepend("<div class=\"pos-f-t\">\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
-            "                        <input type=\"text\" placeholder=\"Titre de votre idée\" id=\"title\" name=\"title\" size=\"30\"><div id=\"uncomplete\"></div><br>\n" +
+            "                        <div id=\"uncomplete\"></div><br>" +
+            "                        <input type=\"text\" placeholder=\"Titre de votre idée\" id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
             "                        <textarea class=\"description\" placeholder=\"Description de votre idée\" id=\"description\" name=\"message\"></textarea><br>\n" +
             "                        <input type=\"button\" name=\"submit\" value=\"Ajouter une idée\" onclick=\"addIdea();\">\n" +
             "                    </form>\n" +
@@ -75,14 +53,13 @@ function displayFormBde(id){
     /**
      * display "add event" form to bde
      */
-
-    if (role == "bde"){
+    if (role == "BDE"){
         $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
             "                        <div id='uncomplete'></div>" +
-            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + idees[id][1] + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
-            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + idees[id][2] + "</textarea><br><br>\n" +
+            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + getTitleById(id) + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
+            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + getDescriptionById(id) + "</textarea><br><br>\n" +
             "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
             "                        <input type=\"file\" name=\"myFile\" style='color: #ffffff'><br><br>" +
             "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id + ");\">\n" +
@@ -108,7 +85,7 @@ function reset()
 
 function addIdea()
 {
-    if(document.getElementById("title").value){
+    if(document.getElementById("title").value &&  document.getElementById("description").value){
         /**
          * remove error message
          * display new idea
@@ -116,9 +93,21 @@ function addIdea()
          * reset form
          */
         $("#uncomplete").empty();
-        var id = 1; //id_idee
-        displayIdee(id, $("#title").value, $("#description").value);
+        alert(id);
+        displayIdee(id, document.getElementById("title").value, document.getElementById("description").value);
+        id++;
+        var obj = { action: "Add", title: document.getElementById("title").value, description: document.getElementById("description").value, userId: userId};
+        var myJSON = JSON.stringify(obj);
+        $.ajax({
+            url: 'http://10.131.131.41:3003/test/',
+            method: 'POST',
+            data: myJSON,
+            success: function (data) {
+                console.log(data);
+            }
+        });
         reset();
+
     }else{
         /**
          * display error message
@@ -126,34 +115,42 @@ function addIdea()
         $("#uncomplete").empty();
         $("#uncomplete").prepend("Vous devez entrer un titre.");
     }
-
 }
 
 function addLike(id) {
     /**
-     * change like button to disable
+     * change "like" button to disable
      * add like in bdd
      * @type {boolean}
      */
     document.getElementById(id).disabled = true;
-    //idees[id][3] = true;
-    //add like to idea with id_idee = id in bdd
-    //rendre le boutton noncliquable
+    var obj = { action: "like", id: id, userId: userId};
+    var myJSON = JSON.stringify(obj);
+    $.ajax({
+        url: 'http://10.131.131.41:3003/test/',
+        method: 'GET',
+        data: myJSON,
+        success: function (data) {
+            console.log(data);
+        }
+    });
 }
 
 function addEvent(id) {
-
-
-
-
     if(document.getElementById("title").value && document.getElementById("description").value && document.getElementById("date").value){
         /**
-         * get values
+         * send values
          */
-        document.getElementById("title").value;
-        document.getElementById("description").value;
-        document.getElementById("date").value;
-
+        var obj = { action: "Remove", title: document.getElementById("title").value, description: document.getElementById("description").value, date: document.getElementById("date").value, image: "path...", userId: userId};
+        var myJSON = JSON.stringify(obj);
+        $.ajax({
+            url: 'http://10.131.131.41:3003/test/',
+            method: 'POST',
+            data: myJSON,
+            success: function (data) {
+                console.log(data);
+            }
+        });
         /**
          * remove idea and form
          */
@@ -166,8 +163,6 @@ function addEvent(id) {
         $("#uncomplete").empty();
         $("#uncomplete").prepend("Vous devez entrer un titre, une description, et une date.");
     }
-
-
 }
 function selectEvent(id) {
     /**

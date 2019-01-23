@@ -9,26 +9,29 @@
 {% block body %}
     <div class="container jumbotron text-center">
         <div class="left">
-            <h1>Connexion</h1><br><br>
+            <h1>Connexion</h1><br>
+            <div class="errorMessage" id="uncompleteC"></div><br>
             <input type="text" placeholder="Nom" id="nameC" name="name"  required
-               minlength="4" maxlength="8" size="30"><br><br>
+               minlength="4" size="30"><br><br>
             <input type="text" placeholder="Prenom" id="firstNameC" name="first name"  required
-               minlength="4" maxlength="8" size="30"><br><br>
+               minlength="4" size="30"><br><br>
             <input type="password" placeholder="Mot de passe" id="passwordC" name="password"  required
-               minlength="8" maxlength="256" size="30"><br><br>
-            <input type="submit" name="submit" onclick="getUserInfoC();"><br><br>
+               minlength="8" size="30"><br><br>
+            <a href="{{ path ('connexion') }}"> <input type="submit" name="submit" onclick="getUserInfoC();"> </a><br><br>
+
         </div>
 
         <div class="right">
-            <h1>Inscription</h1><br><br>
+            <h1>Inscription</h1><br>
+            <div class="errorMessage" id="uncompleteI"></div><br>
             <input type="text" placeholder="Nom" id="nameI" name="name"  required
-                   minlength="4" maxlength="8" size="30"><br><br>
+                   minlength="4" size="30"><br><br>
             <input type="text" placeholder="Prenom" id="firstNameI" name="first name"  required
-                   minlength="4" maxlength="8" size="30"><br><br>
+                   minlength="4" size="30"><br><br>
             <input type="email" placeholder="Adresse email" id="emailI" name="email"  required
-                   minlength="4" maxlength="8" size="30"><br><br>
+                   minlength="4" size="30"><br><br>
             <input list="browsers" placeholder="Localisation" id="localisationI" name="localisation" required
-                   minlength="4" maxlength="8" size="30"><br><br>
+                   minlength="4" size="30"><br><br>
             <datalist id="browsers">
                 <option value="Toulouse">
                 <option value="Paris">
@@ -56,9 +59,16 @@
                 <option value="Arras">
                 <option value="Lille">
             </datalist>
+            <input list="role" placeholder="rôle" id="roleI" name="roleI" required
+                   size="30"><br><br>
+            <datalist id="role">
+                <option value="Etudiant">
+                <option value="BDE">
+                <option value="CESI">
+            </datalist>
             <input type="password" placeholder="Mot de passe" id="passwordI" name="password"  required
-                   minlength="8" maxlength="256" size="30"><br><br>
-            <input type="submit" name="button" onclick="getUserInfoI();"><br><br>
+                   minlength="8" size="30"><br><br>
+            <a href="{{ path ('inscription') }}"> <input type="submit" name="button" onclick="getUserInfoI();"> </a><br><br>
         </div>
     </div>
 {% endblock %}
