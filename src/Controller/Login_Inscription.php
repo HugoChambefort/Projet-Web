@@ -15,25 +15,8 @@ class Login_Inscription extends AbstractController
      */
     public function index()
     {
-
         return $this->render("/Login_Inscription/log_sign.html.twig");
     }
 
-
-
-    /**
-     * @Route ("/connexion", name="connexion")
-     */
-    public function connexion(){
-        return "";
-
-    }
-
-    /**
-     * @Route ("/inscription", name="inscription")
-     */
-    public function inscription(){
-        return "";
-    }
 }
 ?>

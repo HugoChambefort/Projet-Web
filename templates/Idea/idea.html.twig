@@ -21,6 +21,8 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <script>
          var id = 0;
         function initIdees(){
@@ -30,9 +32,9 @@
              */
             displayForm();
             {%  for entry in idees %}
-            displayIdee("{{ entry[0] }}", "{{ entry[1] }}", "{{ entry[2] }}");
-            if(role == "Etudiant"){
-                document.getElementById("{{ entry[0] }}").disabled = "{{ entry[3] }}";
+            displayIdee("{{ entry[0] }}", "{{ entry[2] }}", "{{ entry[3] }}");
+            if($.cookie("userRole") == "Etudiant"){
+                document.getElementById("{{ entry[0] }}").disabled = "{{ entry[4] }}";
             }
             {%  endfor %}
         }
@@ -47,7 +49,7 @@
             var titre = "description exemple";
             {%  for entry in idees %}
             if (id == "{{ entry[0] }}") {
-                titre = "{{ entry[1] }}";
+                titre = "{{ entry[2] }}";
             }
             {%  endfor %}
             return titre
@@ -56,10 +58,20 @@
             var description = "description exemple";
              {%  for entry in idees %}
              if (id == "{{ entry[0] }}") {
-                 description = "{{ entry[2] }}";
+                 description = "{{ entry[3] }}";
              }
              {%  endfor %}
              return description
+         }
+
+         function getEmailById(id){
+             var email = "romain.witz@viacesi.fr";
+             {%  for entry in idees %}
+             if (id == "{{ entry[0] }}") {
+                 email = "{{ entry[1] }}";
+             }
+             {%  endfor %}
+             return email
          }
 
     </script>

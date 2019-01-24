@@ -1,5 +1,3 @@
-var role = "Etudiant";
-var userId = 52;
 var id = lastId();
 
 if(window.addEventListener){
@@ -13,10 +11,11 @@ function displayIdee(id, title, description){
     /**
      * shoose button to like an idea or change an idea to event
      */
-    if (role == "BDE"){
-        button = "onclick=selectEvent(" + id + ")  class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a>";
+    if ($.cookie("userRole") == "BDE"){
+        console.log( $.cookie("userRole"));
+        button = "onclick=selectEvent(" + id +") class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a>";
     }else {
-        button = "onclick=addLike(" + id + ")  class=\"btn btn-primary like\">Voter pour cette idée";
+        button = "onclick=addLike(" + id +",\"" + $.cookie("useremail") +"\")  class=\"btn btn-primary like\">Voter pour cette idée";
     }
 
     /**
@@ -30,7 +29,9 @@ function displayForm(){
     /**
      * add "add idea" form to student and cesi
      */
-    if (role == "Etudiant"){
+    console.log( $.cookie("userRole"));
+
+    if ($.cookie("userRole") == "Etudiant"){
         $("#formulaire").prepend("<div class=\"pos-f-t\">\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
@@ -53,7 +54,7 @@ function displayFormBde(id){
     /**
      * display "add event" form to bde
      */
-    if (role == "BDE"){
+    if ($.cookie("userRole") == "BDE"){
         $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
@@ -62,7 +63,7 @@ function displayFormBde(id){
             "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + getDescriptionById(id) + "</textarea><br><br>\n" +
             "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
             "                        <input type=\"file\" name=\"myFile\" style='color: #ffffff'><br><br>" +
-            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id + ");\">\n" +
+            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id +", \'" + getEmailById(id) +"\');\">\n" +
             "                    </form>\n" +
             "                </div>\n" +
             "                <nav class=\"navbar navbar-dark bg-dark\">\n" +
@@ -93,19 +94,19 @@ function addIdea()
          * reset form
          */
         $("#uncomplete").empty();
-        alert(id);
-        displayIdee(id, document.getElementById("title").value, document.getElementById("description").value);
+        displayIdee(id, document.getElementById("title").value, document.getElementById("description").value, $.cookie("useremail"));
         id++;
-        var obj = { action: "Add", title: document.getElementById("title").value, description: document.getElementById("description").value, userId: userId};
-        var myJSON = JSON.stringify(obj);
+
+        /*var myJSON = {user:[{email:document.getElementById("emailC").value,
+                password:document.getElementById("passwordC").value}]}
         $.ajax({
-            url: 'http://10.131.131.41:3003/test/',
+            url: 'http://10.131.128.250:3003/login/',
             method: 'POST',
             data: myJSON,
-            success: function (data) {
+            success:function (data) {
                 console.log(data);
             }
-        });
+        });*/
         reset();
 
     }else{
@@ -117,14 +118,14 @@ function addIdea()
     }
 }
 
-function addLike(id) {
+function addLike(id, email) {
     /**
      * change "like" button to disable
      * add like in bdd
      * @type {boolean}
      */
     document.getElementById(id).disabled = true;
-    var obj = { action: "like", id: id, userId: userId};
+    var obj = { action: "like", id: id};
     var myJSON = JSON.stringify(obj);
     $.ajax({
         url: 'http://10.131.131.41:3003/test/',
@@ -136,15 +137,17 @@ function addLike(id) {
     });
 }
 
-function addEvent(id) {
+function addEvent(id, email) {
     if(document.getElementById("title").value && document.getElementById("description").value && document.getElementById("date").value){
         /**
          * send values
          */
-        var obj = { action: "Remove", title: document.getElementById("title").value, description: document.getElementById("description").value, date: document.getElementById("date").value, image: "path...", userId: userId};
+        //send mail
+        //remove idea from bdd
+        var obj = { title: document.getElementById("title").value, description: document.getElementById("description").value, date: document.getElementById("date").value, image: "path..."};
         var myJSON = JSON.stringify(obj);
         $.ajax({
-            url: 'http://10.131.131.41:3003/test/',
+            url: 'http://10.131.131.41:3003/IdeaToEvent/',
             method: 'POST',
             data: myJSON,
             success: function (data) {

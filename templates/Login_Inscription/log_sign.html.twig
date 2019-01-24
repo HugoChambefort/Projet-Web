@@ -11,13 +11,11 @@
         <div class="left">
             <h1>Connexion</h1><br>
             <div class="errorMessage" id="uncompleteC"></div><br>
-            <input type="text" placeholder="Nom" id="nameC" name="name"  required
-               minlength="4" size="30"><br><br>
-            <input type="text" placeholder="Prenom" id="firstNameC" name="first name"  required
-               minlength="4" size="30"><br><br>
+            <input type="email" placeholder="Adresse email" id="emailC" name="emailC"  required
+                   minlength="4" size="30"><br><br>
             <input type="password" placeholder="Mot de passe" id="passwordC" name="password"  required
                minlength="8" size="30"><br><br>
-            <a href="{{ path ('connexion') }}"> <input type="submit" name="submit" onclick="getUserInfoC();"> </a><br><br>
+            <input type="submit" name="submit" onclick="getUserInfoC();">
 
         </div>
 
@@ -59,20 +57,14 @@
                 <option value="Arras">
                 <option value="Lille">
             </datalist>
-            <input list="role" placeholder="rôle" id="roleI" name="roleI" required
-                   size="30"><br><br>
-            <datalist id="role">
-                <option value="Etudiant">
-                <option value="BDE">
-                <option value="CESI">
-            </datalist>
             <input type="password" placeholder="Mot de passe" id="passwordI" name="password"  required
                    minlength="8" size="30"><br><br>
-            <a href="{{ path ('inscription') }}"> <input type="submit" name="button" onclick="getUserInfoI();"> </a><br><br>
+            <input type="submit" name="button" onclick="getUserInfoI();"> <br><br>
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="{{ asset ('js/scriptLog.js') }} "></script>
 {% endblock %}
