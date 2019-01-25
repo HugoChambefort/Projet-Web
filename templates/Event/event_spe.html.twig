@@ -2,16 +2,43 @@
 
 {% block title 'Évennements' %}
 
+
+
 {% block body %}
+<style>
+
+    .imgdl{
+        max-height: 120px;
+        min-width: 200px;
+
+    }
+</style>
 
 
 
     <div class = "jumbotron text-center" >
         <h1>Titre de l'Évenement</h1>
+    </div>
+
+    <div>
+
+
+       <form action="/php/AjoutPhoto.php" method="post"  enctype="multipart/form-data">
+
+            <input type="file" name="file" >
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000"/><br><br>
+            <button type="submit" name="submit">Upload</button>
+
+        </form>
+
 
     </div>
 
-
+<div>
+    {% for img in test %}
+    <img src="{{ img }}" style="height: 200px; width: 200px">
+    {% endfor %}
+</div>
 
 
 

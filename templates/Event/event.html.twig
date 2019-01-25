@@ -1,129 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Accueil BDE' %}
+{% block title 'Evenements' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset ('css/styleEvent.css') }} ">
+{% endblock %}
+
+{% block body %}
 
 
-{% block body  %}
-    <style>
-        .imgevent {
-            height: 300px;
-            width: 300px;
-            margin-right: auto;
-            margin-left: auto;
+    <div class = "container jumbotron text-center" >
+        <div id="demo"></div>
+
+        <h1 id="top">Evenements</h1><br>
+        <div id="formulaire"></div>
+    </div>
+    <div class="container text-center event"></div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script>
+        var id = 0;
+        function initEvent(){
+            /**
+             * display "addEvent" form to student and cesi
+             * display all events from bdd
+             */
+            displayForm();
+            {%  for entry in event %}
+            displayEvent("{{ entry[0] }}", "{{ entry[2] }}", "{{ entry[3] }}" ,"{{ entry[1] }}");
+
+            {%  endfor %}
         }
-
-    </style>
-
-    <div class = "jumbotron text-center" >
-        <h1>Recherchez un événement en particulier</h1>
-        <form action="/events" id="searchthis" method="get">
-            <input id="search" name="q" type="text" placeholder="Rechercher" />
-            <input id="search-btn" type="submit" value="Rechercher" />
-        </form>
-    </div>
-
-    <!-- 1ère ligne-->
-    <div class="container-fluide">
-        <div class="row">
-            <div class="card text-center text-white bg-dark col-lg-4">
-                <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap" style="position: center">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <button>Voir plus</button>
-                </div>
-            </div>
-
-            <div class="card text-center  text-white bg-dark col-lg-4">
-                <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <button>Voir plus</button>
-                </div>
-            </div>
-
-            <div class="card text-center text-white bg-dark col-lg-4">
-                <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <button>Voir plus</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <!-- 2ème ligne-->
-    <div class="container-fluide">
-            <div class="row">
-                <div class="card text-center text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap" style="position: center">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-                <div class="card text-center  text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-                <div class="card text-center text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap" >
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    <!-- 3ème ligne-->
-    <div class="container-fluide">
-            <div class="row">
-                <div class="card text-center text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-                <div class="card text-center  text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-                <div class="card text-center text-white bg-dark col-lg-4">
-                    <img class="imgevent" src="/Images/plage.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <button>Voir plus</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    <div class = "container" >
-
-    </div>
+        function lastId(){
+            /**
+             * found last id
+             */
+            id = {{  event|length }};
+            return id;
+        }
+        function getTitleById(id){
+            var titre = "description exemple";
+            {%  for entry in event %}
+            if (id == "{{ entry[0] }}") {
+                titre = "{{ entry[2] }}";
+            }
+            {%  endfor %}
+            return titre
+        }
+        function getDescriptionById(id){
+            var description = "description exemple";
+            {%  for entry in event %}
+            if (id == "{{ entry[0] }}") {
+                description = "{{ entry[3] }}";
+            }
+            {%  endfor %}
+            return description
+        }
+        function getPriceById(id){
+            var price = "64";
+            {%  for entry in event %}
+            if (id == "{{ entry[0] }}") {
+                price = "{{ entry[1] }}";
+            }
+            {%  endfor %}
+            return price
+        }
+    </script>
+    <script src="{{ asset ('js/scriptEvents.js') }} "></script>
 {% endblock %}
