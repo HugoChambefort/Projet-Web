@@ -7,8 +7,6 @@
 {% endblock %}
 
 {% block body %}
-
-
     <div class = "container jumbotron text-center" >
         <div id="demo"></div>
 
@@ -16,95 +14,9 @@
         <div id="formulaire"></div>
     </div>
     <div class="container text-center idees"></div>
-
-
 {% endblock %}
 
 {% block javascripts %}
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-    <script>
-         var id = 0;
-        function initIdees(){
-
-            var send = "idUser="+ $.cookie("userId");
-
-            $.ajax({
-                url: 'http://10.131.128.250:3003/boiteaidee/'/*'http://10.131.131.41:3003/test/'*/,
-                method: 'GET',
-                data: send,
-                success:function (data) {
-                    console.log(data);
-                    if(data.length){
-                        console.log("ui");
-                        console.log(data.length);
-                        for(var i = 0; i< data.length; i++){
-                            console.log(data[i]['id_idee']);
-                            console.log(data[i]['nomIdee']);
-                            console.log(data[i]['descIdee']);
-                            console.log(data[i]['email']);
-                        }
-
-
-
-                    }else{
-                        console.log("nope");
-                    }
-                }
-            });
-
-
-            /**
-             * display "add idea" form to student and cesi
-             * display all ideas from bdd
-             */
-            displayForm();
-
-
-
-            {%  for entry in idees %}
-            displayIdee("{{ entry[0] }}", "{{ entry[2] }}", "{{ entry[3] }}");
-            if($.cookie("userRole") == "Etudiant"){
-                document.getElementById("{{ entry[0] }}").disabled = "{{ entry[4] }}";
-            }
-            {%  endfor %}
-        }
-        function lastId(){
-            /**
-             * found last id
-             */
-            id = {{  idees|length }};
-            return id;
-        }
-        function getTitleById(id){
-            var titre = "description exemple";
-            {%  for entry in idees %}
-            if (id == "{{ entry[0] }}") {
-                titre = "{{ entry[2] }}";
-            }
-            {%  endfor %}
-            return titre
-        }
-         function getDescriptionById(id){
-            var description = "description exemple";
-             {%  for entry in idees %}
-             if (id == "{{ entry[0] }}") {
-                 description = "{{ entry[3] }}";
-             }
-             {%  endfor %}
-             return description
-         }
-
-         function getEmailById(id){
-             var email = "romain.witz@viacesi.fr";
-             {%  for entry in idees %}
-             if (id == "{{ entry[0] }}") {
-                 email = "{{ entry[1] }}";
-             }
-             {%  endfor %}
-             return email
-         }
-
-    </script>
     <script src="{{ asset ('js/scriptIdea.js') }} "></script>
 {% endblock %}

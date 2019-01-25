@@ -1,9 +1,39 @@
-var id = lastId();
+//var id = data.length;
 
 if(window.addEventListener){
     window.addEventListener('load', initIdees, false);
 }else{
     window.attachEvent('onload', initIdees);
+}
+
+function initIdees(){
+    /**
+     * display "add idea" form to student and cesi
+     * display all ideas from bdd
+     */
+    displayForm();
+    var send = "idUser="+ $.cookie("userId");
+    $.ajax({
+        url: 'http://10.131.128.250:3003/boiteaidee/'/*'http://10.131.131.41:3003/test/'*/,
+        method: 'GET',
+        data: send,
+        success:function (data) {
+            console.log(data);
+            if(data.length){
+                console.log("ui");
+                console.log(data.length);
+                for(var i = 0; i< data.length; i++){
+                    console.log(data[i]['id_idee']);
+                    console.log(data[i]['nomIdee']);
+                    console.log(data[i]['descIdee']);
+                    console.log(data[i]['email']);
+                    displayIdee(data[i]['id_idee'], data[i]['nomIdee'], data[i]['descIdee']);
+                }
+            }else{
+                console.log("nope");
+            }
+        }
+    });
 }
 
 function displayIdee(id, title, description){
@@ -59,11 +89,11 @@ function displayFormBde(id){
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
             "                        <div id='uncomplete'></div>" +
-            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + getTitleById(id) + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
-            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + getDescriptionById(id) + "</textarea><br><br>\n" +
+            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + data[id]['nomIdee'] + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
+            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + data[id]['descIdee'] + "</textarea><br><br>\n" +
             "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
             "                        <input type=\"number\" id=\"prix\" name=\"quantity\" placeholder=\"Prix de l\'événement\"><br><br>" +
-            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id +", \'" + getEmailById(id) +"\');\">\n" +
+            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id +", \'" + data[id]['email'] +"\');\">\n" +
             "                    </form>\n" +
             "                </div>\n" +
             "                <nav class=\"navbar navbar-dark bg-dark\">\n" +
@@ -124,11 +154,7 @@ function addLike(id, email) {
      * @type {boolean}
      */
     document.getElementById(id).disabled = true;
-
-
     console.log(id + " - "+ $.cookie("userId"));
-
-
     var myJSON = {user:{idIdee: id, idUser: $.cookie("userId")}}
     $.ajax({
         url: 'http://10.131.128.250:3003/liker/'/*'http://10.131.131.41:3003/test/'*/,

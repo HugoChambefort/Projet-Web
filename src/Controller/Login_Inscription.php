@@ -17,6 +17,5 @@ class Login_Inscription extends AbstractController
     {
         return $this->render("/Login_Inscription/log_sign.html.twig");
     }
-
 }
 ?>
