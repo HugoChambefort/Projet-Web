@@ -7,61 +7,72 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container jumbotron text-center">
-        <div class="left">
-            <h1>Connexion</h1><br>
-            <div class="errorMessage" id="uncompleteC"></div><br>
-            <input type="email" placeholder="Adresse email" id="emailC" name="emailC"  required
-                   minlength="4" size="30"><br><br>
-            <input type="password" placeholder="Mot de passe" id="passwordC" name="password"  required
-               minlength="8" size="30"><br><br>
-            <input type="submit" name="submit" onclick="getUserInfoC();">
 
+
+    <div class="container text-center">
+        <div class="jumbotron">
+            <h1>Connexion & Inscription</h1>
+            <p>Veuillez entrer vos identifiants</p>
         </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <h2>Connexion</h2><br>
+                <div class="errorMessage" id="uncompleteC"></div><br>
+                <input type="email" placeholder="Adresse email" id="emailC" name="emailC"  required
+                       minlength="4" size="30"><br><br>
+                <input type="password" placeholder="Mot de passe" id="passwordC" name="password"  required
+                       minlength="8" size="30"><br><br>
+                <input type="submit" name="submit" onclick="getUserInfoC();"><br><br>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <h2>Inscription</h2><br>
+                <div class="errorMessage" id="uncompleteI"></div><br>
+                <input type="text" placeholder="Nom" id="nameI" name="name"  required
+                       minlength="4" size="30"><br><br>
+                <input type="text" placeholder="Prenom" id="firstNameI" name="first name"  required
+                       minlength="4" size="30"><br><br>
+                <input type="email" placeholder="Adresse email" id="emailI" name="email"  required
+                       minlength="4" size="30"><br><br>
+                <input list="browsers" placeholder="Localisation" id="localisationI" name="localisation" required
+                       minlength="4" size="30"><br><br>
+                <datalist id="browsers">
+                    <option value="Toulouse">
+                    <option value="Paris">
+                    <option value="Pau">
+                    <option value="Montpellier">
+                    <option value="Aix-en-Provence">
+                    <option value="Nice">
+                    <option value="Grenoble">
+                    <option value="Lyon">
+                    <option value="Dijon">
+                    <option value="Châteauroux">
+                    <option value="Angoulême">
+                    <option value="Bordeaux">
+                    <option value="La Rochelle">
+                    <option value="Nantes">
+                    <option value="Saint-Nazaire">
+                    <option value="Brest">
+                    <option value="Le Mans">
+                    <option value="Orléans">
+                    <option value="Caen">
+                    <option value="Rouen">
+                    <option value="Reims">
+                    <option value="Nancy">
+                    <option value="Strasbourg">
+                    <option value="Arras">
+                    <option value="Lille">
+                </datalist>
+                <input type="password" placeholder="Mot de passe" id="passwordI" name="password"  required
+                       minlength="8" size="30">
+                <p> Le mot de passe doit contenir au moins un nombre et une majuscule.</p>
+                <input type="submit" name="button" onclick="getUserInfoI();"> <br><br>
+            </div>
 
-        <div class="right">
-            <h1>Inscription</h1><br>
-            <div class="errorMessage" id="uncompleteI"></div><br>
-            <input type="text" placeholder="Nom" id="nameI" name="name"  required
-                   minlength="4" size="30"><br><br>
-            <input type="text" placeholder="Prenom" id="firstNameI" name="first name"  required
-                   minlength="4" size="30"><br><br>
-            <input type="email" placeholder="Adresse email" id="emailI" name="email"  required
-                   minlength="4" size="30"><br><br>
-            <input list="browsers" placeholder="Localisation" id="localisationI" name="localisation" required
-                   minlength="4" size="30"><br><br>
-            <datalist id="browsers">
-                <option value="Toulouse">
-                <option value="Paris">
-                <option value="Pau">
-                <option value="Montpellier">
-                <option value="Aix-en-Provence">
-                <option value="Nice">
-                <option value="Grenoble">
-                <option value="Lyon">
-                <option value="Dijon">
-                <option value="Châteauroux">
-                <option value="Angoulême">
-                <option value="Bordeaux">
-                <option value="La Rochelle">
-                <option value="Nantes">
-                <option value="Saint-Nazaire">
-                <option value="Brest">
-                <option value="Le Mans">
-                <option value="Orléans">
-                <option value="Caen">
-                <option value="Rouen">
-                <option value="Reims">
-                <option value="Nancy">
-                <option value="Strasbourg">
-                <option value="Arras">
-                <option value="Lille">
-            </datalist>
-            <input type="password" placeholder="Mot de passe" id="passwordI" name="password"  required
-                   minlength="8" size="30"><br><br>
-            <input type="submit" name="button" onclick="getUserInfoI();"> <br><br>
         </div>
     </div>
+
+
+
 {% endblock %}
 
 {% block javascripts %}

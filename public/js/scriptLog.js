@@ -3,17 +3,12 @@
  */
 function getUserInfoC()
 {
-
-
     if($("#emailC").val() && $("#passwordC").val()){
         $("#uncompleteC").empty();
         $("#uncompleteI").empty();
-        //requete bdd pour verifier
-        //rediriger vers l'accueil
-
         var send = "password="+ $("#passwordC").val() +"&email=" + $("#emailC").val();
         $.ajax({
-            url: 'http://10.131.128.250:3003/login/'/*'http://10.131.131.41:3003/test/'*/,
+            url: 'http://10.131.128.250:3003/login/',
             method: 'GET',
             data: send,
             success:function (data) {
@@ -29,15 +24,15 @@ function getUserInfoC()
                     $.cookie("userId", "");
                     $.cookie("userRole", "");
                     $.cookie("useremail", "");
+                    $("#uncompleteC").prepend("Votre email ou votre mot de passe est erroné.");
+
                 }
-
                 console.log("id: " + $.cookie("userId") + ", role: " + $.cookie("userRole") + ", email: " + $.cookie("useremail"));
-
             }
         });
 
         $.cookie("userId", "2");
-        $.cookie("userRole", "1");
+        $.cookie("userRole", "2");
         $.cookie("useremail", "tom.hoyo@viacesi.fr");
         console.log($.cookie("userRole") + " " + $.cookie("useremail") + " " + $.cookie("userId"));
 
@@ -49,6 +44,7 @@ function getUserInfoC()
         $("#uncompleteC").empty();
         $("#uncompleteC").prepend("Vous devez remplir tous les champs.");
     }
+
 }
 
 /**
@@ -60,17 +56,35 @@ function getUserInfoI()
         $("#uncompleteI").empty();
         $("#uncompleteC").empty();
 
-        var myJSON = {user:{name: $("#nameI").val(), firstName: $("#firstNameI").val(), email: $("#emailI").val(),
-                localisation: $("#localisationI").val(), password: $("#passwordI").val()}}
-        $.ajax({
-            url: 'http://10.131.128.250:3003/inscription/',
-            method: 'POST',
-            data: myJSON,
-            success:function (data) {
-                console.log(data);
-            }
-        });
 
+        if (/@viacesi.fr$|@cesi.fr$/.test($("#emailI").val())) {
+            console.log('bon email');
+            if (/[A-Z]/.test($("#passwordI").val())) {
+                if (/[0-9]/.test($("#passwordI").val())) {
+                    console.log('mot de passe bon');
+                    var myJSON = {user:{name: $("#nameI").val(), firstName: $("#firstNameI").val(), email: $("#emailI").val(),
+                            localisation: $("#localisationI").val(), password: $("#passwordI").val()}}
+                    console.log(myJSON);
+                    $.ajax({
+                        url: 'http://10.131.128.250:3003/inscription/',
+                        method: 'POST',
+                        data: myJSON,
+                        success:function (data) {
+                            console.log(data);
+                        }
+                    });
+                } else {
+                    console.log('pas nbr');
+                    $("#uncompleteI").prepend("Votre mot de passe doit contenir au moins un nombre et une majuscule.");
+                }
+            } else {
+                console.log('pas maj');
+                $("#uncompleteI").prepend("Votre mot de passe doit contenir au moins un nombre et une majuscule.");
+            }
+        } else {
+            console.log('mauvais email');
+            $("#uncompleteI").prepend("Votre adresse mail n'est pas valable.");
+        }
         //rediriger vers l'accueil
     }else{
         /**

@@ -7,28 +7,19 @@ if(window.addEventListener){
 }
 
 function displayEvent(id, title, description,price){
-    var button;
-    /**
-     * shoose button to like an idea or change an idea to event
-     */
-    if ($.cookie("userRole") == "BDE"){
-        console.log( $.cookie("userRole"));
-        button = "onclick=selectEvent(" + id +") class=\"btn btn-primary like txtbtn\"><a href='/evenement_spe' style='color: white;'>Éditer l'événement</a>";
-    }else {
-        button = "onclick=addLike(" + id +",\"" + $.cookie("useremail") +"\")  class=\"btn btn-primary like\"><a onclick='inscription()' style='color: white;'>Voir l'événement </a>";
-    }
-
     /**
      * display Event
      */
     $(".event").prepend("<div class=\"card idee\" id=" + id + "-" + id +" >" +
-        "<div class=\"card-body\n\">" +
-        "<h5 class=\"card-title\">" + title + "</h5>" +
-        "<p class=\"card-text scroll\">" + description + "</p>" +
-        "<p class=\"card-title\">" + price + "</p>" +
-        "<button id=\'" + id + "\' " + button + "</button><" +
-        "/div>" +
-        "</div>");
+                                "   <div class=\"card-body\n\">" +
+                                "        <h5 class=\"card-title\">" + title + "</h5>" +
+                                "        <p class=\"card-text scroll\">" + description + "</p>" +
+                                "        <p class=\"card-title\">" + price + "</p>" +
+                                "        <a  href=\"/event_spe\">" +
+                                "           <button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', "+price+");\" class=\"btn btn-primary like txtbtn\">Éditer l'événement</button>" +
+                                "        </a>" +
+                                "   </div>" +
+                                "</div>");
 
 }
 
@@ -36,7 +27,7 @@ function displayForm(){
 
     console.log( $.cookie("userRole"));
 
-    if ($.cookie("userRole") == "BDE"){
+    if ($.cookie("userRole") == "1"){
         $("#formulaire").prepend("<div class=\"pos-f-t\">\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
@@ -60,7 +51,7 @@ function displayFormBde(id){
     /**
      * display "add event" form to bde
      */
-    if ($.cookie("userRole") == "Etudiant"){
+    if ($.cookie("userRole") == "0"){
         $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
@@ -145,10 +136,15 @@ function inscription(id, email) {
 }
 
 
-function selectEvent(id) {
-    /**
-     * display form with idea values
-     */
-    $("#formulaire").empty();
+function selectEvent(id, title, description, price) {
+    $.cookie("eventId", id);
+    $.cookie("eventTitle", title);
+    $.cookie("eventDesc", description);
+    $.cookie("eventPrice", price);
+    console.log($.cookie("eventId"));
+    console.log($.cookie("eventTitle"));
+    console.log($.cookie("eventDesc"));
+    console.log($.cookie("eventPrice"));
+
 
 }

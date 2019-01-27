@@ -1,4 +1,5 @@
-//var id = data.length;
+var id;
+var data;
 
 if(window.addEventListener){
     window.addEventListener('load', initIdees, false);
@@ -11,10 +12,15 @@ function initIdees(){
      * display "add idea" form to student and cesi
      * display all ideas from bdd
      */
+
+
+
+
+
     displayForm();
-    var send = "idUser="+ $.cookie("userId");
+    /*var send = "idUser="+ $.cookie("userId");
     $.ajax({
-        url: 'http://10.131.128.250:3003/boiteaidee/'/*'http://10.131.131.41:3003/test/'*/,
+        url: 'http://10.131.128.250:3003/boiteaidee/',
         method: 'GET',
         data: send,
         success:function (data) {
@@ -23,17 +29,35 @@ function initIdees(){
                 console.log("ui");
                 console.log(data.length);
                 for(var i = 0; i< data.length; i++){
-                    console.log(data[i]['id_idee']);
-                    console.log(data[i]['nomIdee']);
+                    console.log(data[i]['id_idee'] +  " - " + data[i]['nomIdee'] + " - " + data[i]['email']);
                     console.log(data[i]['descIdee']);
-                    console.log(data[i]['email']);
                     displayIdee(data[i]['id_idee'], data[i]['nomIdee'], data[i]['descIdee']);
+                    id = data.length;
+
                 }
             }else{
                 console.log("nope");
             }
         }
+    });*/
+
+
+    data = [{id_idee: 0, nomIdee: "titre exemple 0", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"},
+                    {id_idee: 1, nomIdee: "titre exemple 1", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"},
+                    {id_idee: 2, nomIdee: "titre exemple 2", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"},
+                    {id_idee: 3, nomIdee: "titre exemple 3", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"},
+                    {id_idee: 4, nomIdee: "titre exemple 4", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"},
+                    {id_idee: 5, nomIdee: "titre exemple 5", email: "tom.hoyo@viacesi.fr", descIdee: "ut fgzeufgeqsft uesqutqdsfguteqgfute iyfu gzriyf gzriyf gazriuyf gzryif gzrefyiu zrgfiyzaurgfyiuzr gfzeyiufgzeryfi gzeayf gzefyiuz egfyizeag fzaefyuzeig fizyegfozeiyuf gzarfszfdhvbshvjbsjhvgzrbfyibzasdfvyizrb fiyzargfisyfu gvshbvesryifg zriyfgsfivbzriyg zryifgzryoifzrbifhbzr iyugzrifgzrifgygzrfisrgifl sfqkhjvb sqihfgrsqifyg fqsduf gdqshfbsdqhjkf bsqdkhf gsdqkjyfg qsdkfy gsdqhfkgsdq hfsdqg fksqdgf isdyqgfqsdkyf gsqdkfsdqhfgqsd"}];
+
+
+    $.each(data, function(key, idee) {
+        console.log(idee.id_idee+" - "+idee.nomIdee+" - "+idee.email+" - "+idee.descIdee+"\n");
+        displayIdee(idee.id_idee, idee.nomIdee, idee.descIdee);
+
     });
+    id = data.length;
+
+
 }
 
 function displayIdee(id, title, description){
@@ -51,7 +75,14 @@ function displayIdee(id, title, description){
     /**
      * display idea
      */
-    $(".idees").prepend("<div class=\"card idee\" id=" + id + "-" + id +" ><div class=\"card-body\n\"><h5 class=\"card-title\">" + title + "</h5><p class=\"card-text scroll\">" + description + "</p><button id=\'" + id + "\' " + button + "</button></div></div>");
+    $(".idees").prepend("<div class=\"card idee\" id=" + id + "-" + id +" >" +
+    "                               <div class=\"card-body\n\">" +
+    "                                   <h5 class=\"card-title\">" + title + "</h5>" +
+    "                                   <p class=\"card-text scroll\">" + description + "</p>" +
+    "                                   <button id=\'" + id + "\' " + button + "</button>" +
+    "                               </div>" +
+    "                           </div>");
+
 
 }
 
@@ -89,6 +120,28 @@ function displayFormBde(id){
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
             "                        <div id='uncomplete'></div>" +
+            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + data[id].nomIdee + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
+            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + data[id].descIdee + "</textarea><br><br>\n" +
+            "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
+            "                        <input type=\"number\" id=\"prix\" name=\"quantity\" placeholder=\"Prix de l\'événement\"><br><br>" +
+            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclick=\"addEvent(" + id +", \'" + data[id].email +"\');\">\n" +
+            "                    </form>\n" +
+            "                </div>\n" +
+            "                <nav class=\"navbar navbar-dark bg-dark\">\n" +
+            "                    <h2 class=\"txtnav\">Ajouter événement</h2>\n" +
+            "                    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
+            "                        <div class=\"navbar-toggler-icon\"></div>\n" +
+            "                    </button>\n" +
+            "                </nav><br>\n" +
+            "            </div>");
+    }
+
+    /*
+    if ($.cookie("userRole") == "1"){
+        $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
+            "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
+            "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
+            "                        <div id='uncomplete'></div>" +
             "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + data[id]['nomIdee'] + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
             "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + data[id]['descIdee'] + "</textarea><br><br>\n" +
             "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
@@ -104,6 +157,7 @@ function displayFormBde(id){
             "                </nav><br>\n" +
             "            </div>");
     }
+    */
 }
 
 function reset()
@@ -137,6 +191,7 @@ function addIdea()
             }
         });
         reset();
+        console.log(id);
 
     }else{
         /**
