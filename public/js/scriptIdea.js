@@ -198,8 +198,11 @@ function addEvent(id, email) {
             data: myJSON,
             success:function (data) {
                 console.log(data);
+
             }
         });
+        var link = "mailto:" + email + "?cc=&subject=Ajout d'événement&body=Bonjour, le BDE de ton école a selectionné ton idée "+ document.getElementById("title").value + " pour en faire une manifestation à laquelle tu pourras participer le "+ document.getElementById("date").value+ ", pour un prix de "+ document.getElementById("prix").value+"€.";
+        window.location.href = link;
         /**
          * remove idea and form
          */
