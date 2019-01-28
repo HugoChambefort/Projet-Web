@@ -31,9 +31,6 @@ function getUserInfoC()
             }
         });
 
-        $.cookie("userId", "2");
-        $.cookie("userRole", "2");
-        $.cookie("useremail", "tom.hoyo@viacesi.fr");
         console.log($.cookie("userRole") + " " + $.cookie("useremail") + " " + $.cookie("userId"));
 
     }else{
