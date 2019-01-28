@@ -2,16 +2,21 @@
 
 {% block title 'Évennements' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset ('css/styleEventspe.css') }} ">
 
+{% endblock %}
 
 {% block body %}
-    <p>Bravo!!!!!!!!!!!</p>
-    <h1 id="title"></h1>
-    <p id="description"></p>
-    <div id="price">Prix : </div>
-    <div id="btnIns"></div>
+    <div class="jumbotron text-center">
+        <h1 id="title"></h1>
+    </div>
 
-
+    <div class="lu">
+        <p id="description"></p>
+        <div id="price">Prix : </div><br>
+        <div id="btnIns"></div>
+    </div>
 
 {% endblock %}
 

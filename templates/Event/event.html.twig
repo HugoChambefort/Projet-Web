@@ -23,53 +23,5 @@
 {% block javascripts %}
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-    <script>
-        var id = 0;
-        function initEvent(){
-            /**
-             * display "addEvent" form to student and cesi
-             * display all events from bdd
-             */
-            displayForm();
-            {%  for entry in event %}
-            displayEvent("{{ entry[0] }}", "{{ entry[2] }}", "{{ entry[3] }}" ,"{{ entry[1] }}");
-
-            {%  endfor %}
-        }
-        function lastId(){
-            /**
-             * found last id
-             */
-            id = {{  event|length }};
-            return id;
-        }
-        function getTitleById(id){
-            var titre = "description exemple";
-            {%  for entry in event %}
-            if (id == "{{ entry[0] }}") {
-                titre = "{{ entry[2] }}";
-            }
-            {%  endfor %}
-            return titre
-        }
-        function getDescriptionById(id){
-            var description = "description exemple";
-            {%  for entry in event %}
-            if (id == "{{ entry[0] }}") {
-                description = "{{ entry[3] }}";
-            }
-            {%  endfor %}
-            return description
-        }
-        function getPriceById(id){
-            var price = "64";
-            {%  for entry in event %}
-            if (id == "{{ entry[0] }}") {
-                price = "{{ entry[1] }}";
-            }
-            {%  endfor %}
-            return price
-        }
-    </script>
     <script src="{{ asset ('js/scriptEvents.js') }} "></script>
 {% endblock %}

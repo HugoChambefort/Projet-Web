@@ -1,4 +1,3 @@
-
 if(window.addEventListener){
     window.addEventListener('load', initEvent, false);
 }else{
@@ -11,47 +10,46 @@ function initEvent(){
     $("#description").prepend($.cookie("eventDesc"));
     $("#price").append($.cookie("eventPrice") + "€");
     displayBtn();
+    displayImg();
 }
 
 function displayBtn(){
     if ($.cookie("userRole") == 2){
         var button = "<a href=\'events\'><button id=\'report\' onclick=report()>Signaler</button></a>"
     } else if($.cookie("userRole") == 1){
-        var button = "<a href=\'events\'><button id=\'remove\' onclick=Remove()>Annuler</button></a>"
+        var button = "<a href=\'events\'><button id=\'remove\' onclick=remove()>Annuler</button></a>"
     }else if($.cookie("userRole") == 0){
-        var button = "<button id=\'inscrire\' onclick=Inscrire()>S'inscrire à cet événement</button>"
+        var button = "<button id=\'inscrire\' onclick=inscrire()>S'inscrire à cet événement</button>"
     }
     $("#btnIns").prepend(button);
 }
 
 function report(){
-    var myJSON = {user:{idEvent: $.cookie("eventId")}}
-    console.log(myJSON);
+    var send = "idEvent=" + $.cookie("eventId")
     $.ajax({
-        url: 'http://10.131.128.250:3003/removeevent/',
-        method: 'POST',
-        data: myJSON,
+        url: 'http://10.131.128.250:3003/supperevent/',
+        method: 'DELETE',
+        data: send,
         success:function (data) {
             console.log(data);
         }
     });
 }
 
-function Remove(){
-    var myJSON = {user:{idEvent: $.cookie("eventId")}}
-    console.log(myJSON);
+function remove(){
+    var send = "idEvent=" + $.cookie("eventId")
     $.ajax({
-        url: 'http://10.131.128.250:3003/removeevent/',
-        method: 'POST',
-        data: myJSON,
+        url: 'http://10.131.128.250:3003/supperevent/',
+        method: 'DELETE',
+        data: send,
         success:function (data) {
             console.log(data);
         }
     });
 }
 
-function Inscrire(){
-    var myJSON = {user:{idEvent: $.cookie("userId")}}
+function inscrire(){
+    var myJSON = {user:{idUser: $.cookie("userId"), idEvent: $.cookie("eventId")}}
     console.log(myJSON);
     $.ajax({
         url: 'http://10.131.128.250:3003/inscriptionevent/',
@@ -62,5 +60,19 @@ function Inscrire(){
         }
     });
     $("#btnIns").disabled = true;
+}
 
+function displayImg(){
+    var send = "idEvent="+ $.cookie("userId")
+    $.ajax({
+        url: 'http://10.131.128.250:3003/imagesEvent/',
+        method: 'GET',
+        data: send,
+        success:function (data) {
+            console.log(data);
+            if(data.length){
+            }else{
+            }
+        }
+    });
 }

@@ -1,10 +1,37 @@
-var id = lastId();
+var id=0;
 
 if(window.addEventListener){
     window.addEventListener('load', initEvent, false);
 }else{
     window.attachEvent('onload', initEvent);
 }
+function initEvent(){
+    /**
+     * display "addEvent" form to student and cesi
+     * display all events from bdd
+     */
+    var send = "idUser="+ $.cookie("userId");
+    $.ajax({
+        url: 'http://10.131.128.250:3003/evenements/',
+        method: 'GET',
+        data: send,
+        success:function (data) {
+            console.log(data);
+            if(data.length){
+                console.log("event recup");
+                for(var i=0; i<data.length; i++){
+                    displayEvent(data[i]['id_event'], data[i]['nomEvent'], data[i]['descEvent'] ,data[i]['priceEvent']);
+                }
+                id = data.length;
+            }else{
+                console.log("pas devent recup");
+            }
+        }
+    });
+
+    displayForm();
+}
+
 
 function displayEvent(id, title, description,price){
     /**
@@ -20,7 +47,6 @@ function displayEvent(id, title, description,price){
                                 "        </a>" +
                                 "   </div>" +
                                 "</div>");
-
 }
 
 function displayForm(){
@@ -33,8 +59,9 @@ function displayForm(){
             "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
             "                        <div id=\"uncomplete\"></div><br>" +
             "                        <input type=\"text\" placeholder=\"Titre de l'événement\" id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
-            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\"></textarea><br>\n" +
-            "                        <input type='number' placeholder=\"Prix : \" id=\"price\" name=\"price\"><br>\n"+
+            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\"></textarea><br><br>\n" +
+            "                        <input type=\"date\" id=\"date\" />" +
+            "                        <input type='number' placeholder=\"Prix : \" id=\"price\" name=\"price\"><br><br>\n"+
             "                        <input type=\"button\" name=\"submit\" value=\"Ajouter une idée\" onclick=\"addEvent();\">\n" +
             "                    </form>\n" +
             "                </div>\n" +
@@ -47,32 +74,7 @@ function displayForm(){
             "            </div>");
     }
 }
-function displayFormBde(id){
-    /**
-     * display "add event" form to bde
-     */
-    if ($.cookie("userRole") == "0"){
-        $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
-            "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
-            "                    <form class=\"bg-dark p-4\" id=\"myForm\">\n" +
-            "                        <div id='uncomplete'></div>" +
-            "                        <input type=\"text\" placeholder=\"Titre de l'événement\" value=\'" + getTitleById(id) + "\' id=\"title\" name=\"title\" size=\"30\"><br><br>\n" +
-            "                        <textarea class=\"description\" placeholder=\"Description de l'événement\" id=\"description\" name=\"message\">" + getDescriptionById(id) + "</textarea><br>\n" +
-            "                        <textarea  id=\"price\" name=\"price\">" + getPriceById(id) + "</textarea><br>\n"+
-            "                        <input type=\"date\" id=\"date\" />\n<br><br>" +
-            "                        <input type=\"file\" name=\"myFile\" style='color: #ffffff'><br><br>" +
-            "                        <input type=\"button\" name=\"submit\" value=\"Ajouter un événement\" onclickg=\"addEvent(" + id +", \'\">\n" +
-            "                    </form>\n" +
-            "                </div>\n" +
-            "                <nav class=\"navbar navbar-dark bg-dark\">\n" +
-            "                    <h2 class=\"txtnav\">Ajouter événement</h2>\n" +
-            "                    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
-            "                        <div class=\"navbar-toggler-icon\"></div>\n" +
-            "                    </button>\n" +
-            "                </nav><br>\n" +
-            "            </div>");
-    }
-}
+
 
 function reset()
 {
@@ -92,20 +94,22 @@ function addEvent() {
              * reset form
              */
             $("#uncomplete").empty();
-            displayEvent(id, document.getElementById("title").value, document.getElementById("description").value, document.getElementById("price"));
-            id++;
 
-            /*var myJSON = {user:[{email:document.getElementById("emailC").value,
-                    password:document.getElementById("passwordC").value}]}
+            var myJSON = {user:{titre: document.getElementById("title").value, description: document.getElementById("description").value,
+                    date: document.getElementById("date").value, price: document.getElementById("price").value, idUser: $.cookie("userId")}}
+            console.log(myJSON);
             $.ajax({
-                url: 'http://10.131.128.250:3003/login/',
+                url: 'http://10.131.128.250:3003/newevent/',
                 method: 'POST',
                 data: myJSON,
                 success:function (data) {
                     console.log(data);
+                    displayEvent(id, document.getElementById("title").value, document.getElementById("description").value, document.getElementById("price"));
+                    id++;
+                    reset();
                 }
-            });*/
-            reset();
+            });
+
 
         } else {
             /**
@@ -141,10 +145,4 @@ function selectEvent(id, title, description, price) {
     $.cookie("eventTitle", title);
     $.cookie("eventDesc", description);
     $.cookie("eventPrice", price);
-    console.log($.cookie("eventId"));
-    console.log($.cookie("eventTitle"));
-    console.log($.cookie("eventDesc"));
-    console.log($.cookie("eventPrice"));
-
-
 }

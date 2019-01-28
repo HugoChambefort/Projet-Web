@@ -12,11 +12,6 @@ function initIdees(){
      * display "add idea" form to student and cesi
      * display all ideas from bdd
      */
-
-
-
-
-
     displayForm();
     var send = "idUser="+ $.cookie("userId");
     $.ajax({
