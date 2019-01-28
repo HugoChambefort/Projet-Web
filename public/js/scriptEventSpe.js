@@ -8,6 +8,7 @@ function initEvent(){
 
     $("#title").prepend($.cookie("eventTitle"));
     $("#description").prepend($.cookie("eventDesc"));
+    $("#date").prepend($.cookie("eventDate"));
     $("#price").append($.cookie("eventPrice") + "€");
     displayBtn();
     displayImg();
@@ -17,7 +18,7 @@ function displayBtn(){
     if ($.cookie("userRole") == 2){
         var button = "<a href=\'events\'><button id=\'report\' onclick=report()>Signaler</button></a>"
     } else if($.cookie("userRole") == 1){
-        var button = "<a href=\'events\'><button id=\'remove\' onclick=remove()>Annuler</button></a>"
+        var button = "<a href=\'events\'><button id=\'remove\' onclick=remove()>Annuler l'événement</button></a>"
     }else if($.cookie("userRole") == 0){
         var button = "<button id=\'inscrire\' onclick=inscrire()>S'inscrire à cet événement</button>"
     }
@@ -59,7 +60,6 @@ function inscrire(){
             console.log(data);
         }
     });
-    $("#btnIns").disabled = true;
 }
 
 function displayImg(){

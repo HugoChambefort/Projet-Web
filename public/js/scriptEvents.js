@@ -20,7 +20,7 @@ function initEvent(){
             if(data.length){
                 console.log("event recup");
                 for(var i=0; i<data.length; i++){
-                    displayEvent(data[i]['id_event'], data[i]['nomEvent'], data[i]['descEvent'] ,data[i]['priceEvent']);
+                    displayEvent(data[i]['id_event'], data[i]['nomEvent'], data[i]['descEvent'] ,data[i]['priceEvent'], data[i]['dateEvent']);
                 }
                 id = data.length;
             }else{
@@ -33,7 +33,7 @@ function initEvent(){
 }
 
 
-function displayEvent(id, title, description,price){
+function displayEvent(id, title, description,price, date){
     /**
      * display Event
      */
@@ -41,9 +41,10 @@ function displayEvent(id, title, description,price){
                                 "   <div class=\"card-body\n\">" +
                                 "        <h5 class=\"card-title\">" + title + "</h5>" +
                                 "        <p class=\"card-text scroll\">" + description + "</p>" +
-                                "        <p class=\"card-title\">" + price + "</p>" +
+                                "        <span>"+ date +"</span>" +
+                                "        <span class=\"card-title\">Prix: " + price + "€</span><br>" +
                                 "        <a  href=\"/event_spe\">" +
-                                "           <button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', "+price+");\" class=\"btn btn-primary like txtbtn\">Éditer l'événement</button>" +
+                                "           <button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', "+price+", \'"+date+"\');\" class=\"btn btn-primary like txtbtn\">Éditer l'événement</button>" +
                                 "        </a>" +
                                 "   </div>" +
                                 "</div>");
@@ -104,7 +105,7 @@ function addEvent() {
                 data: myJSON,
                 success:function (data) {
                     console.log(data);
-                    displayEvent(id, document.getElementById("title").value, document.getElementById("description").value, document.getElementById("price"));
+                    displayEvent(id, document.getElementById("title").value, document.getElementById("description").value, document.getElementById("price").value, document.getElementById("date").value);
                     id++;
                     reset();
                 }
@@ -140,9 +141,12 @@ function inscription(id, email) {
 }
 
 
-function selectEvent(id, title, description, price) {
+function selectEvent(id, title, description, price, date) {
     $.cookie("eventId", id);
     $.cookie("eventTitle", title);
     $.cookie("eventDesc", description);
     $.cookie("eventPrice", price);
+    $.cookie("eventDate", date);
+
+
 }
