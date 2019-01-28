@@ -23,10 +23,16 @@
             };
         }
 
-    function displayBoutique(img, titre, categorie, description, prix, id){
-        
-        $(".imgAV").prepend("<div class=\"imgText\"><img id=\"aVendre\" src=\"" + img + "\" alt=\"osef img\"><p class=\"NomArticle\" id=\"title\"><strong>" + titre + "</strong><br>"+categorie+"<br>" + description + "<br><strong>Prix : </strong>" + prix + "€</p><button class=\"boutonAdd\" onclick=\"addPannier(this.id),openRightMenu(),addPrixPanier(this.id)\" id=\""+id+"\">Ajouter au panier</button></div>");
-    }
+        function displayBoutique(img, titre, categorie, description, prix, id){
+            console.log(id);
+            var btn = "";
+            if ($.cookie("userRole") == "BDE"){
+
+                console.log( $.cookie("userRole"));
+                btn = "<button onclick=\"delArticleBoutique(this.parentNode)\" id=\""+id+"\">Supprimer</button>";
+            }
+            $(".imgAV").prepend("<div class=\"imgText\"><img id=\"aVendre\" src=\"" + img + "\" alt=\"osef img\"><p class=\"NomArticle\" id=\"title\"><strong>" + titre + "</strong><br>"+categorie+"<br>" + description + "<br><strong>Prix : </strong>" + prix + "€</p><button class=\"boutonAdd\" onclick=\"addPannier(this.id), openRightMenu(), addPrixPanier(this.id)\" id=\""+id+"\">Ajouter au panier</button>"+ btn + "</div>");
+        }
 
     
     /* *********************************Ajouter au panier*************************************************** */
@@ -39,36 +45,59 @@
         
     }
     
-    /* *********************************Supprimer du panier************************************************* */
+    /* *********************************Supprimer*********************************************************** */
     
-    tampon = 0;
-
     function delElemPanier(id){
-
+        
         id.parentNode.removeChild(id);
     }
     
+    function delArticleBoutique(id){
+        
+        if (confirm("Voulez-vous vraiment supprimer cet artcile de la boutique ?")) {
+            
+            id.parentNode.removeChild(id);
+        }
+    }
+    
+    /* *********************************Meilleurs ventes**************************************************** */
+    
+    
+
+    
     /* *********************************Calcule prix du panier********************************************** */
+    
+    tampon = 0;
 
     function addPrixPanier(id){
+        
         prix = boutique[id-1][5];
         var  prixCorrect = parseInt(prix);  
         tampon = tampon + prixCorrect;
         $("div.total").replaceWith("<div class=\"total\" id=\""+id+"\"></div>")
-        $(".total").prepend("<h3 class=\"totale\" id=\""+id+"\">Montant total : "+tampon+"€</h3>");
+        $(".total").prepend("<h3 class=\"totale\" id=\""+id+"\">Montant total : "+tampon+"€<button class=\"payer\">Payer</button></h3>");
     }
-
+    
     function delPrixPanier(id){
-
+        
         prix = boutique[id-1][5];
         var  prixCorrect = parseInt(prix);  
         tampon = tampon - prixCorrect;
-        $("div.total").replaceWith("<div class=\"total\" id=\""+id+"\"></div>")
-        $(".total").prepend("<h3 class=\"totale\" id=\""+id+"\">Montant total : "+tampon+"€</h3>");
+
+        if (tampon == 0) {
+
+            $("div.total").replaceWith("<div class=\"total\" id=\""+id+"\"></div>")
+            $(".total").prepend("<h3 class=\"totale\" id=\""+id+"\">Montant total : "+tampon+"€</h3>"); 
+
+        }else{
+            
+            $("div.total").replaceWith("<div class=\"total\" id=\""+id+"\"></div>")
+            $(".total").prepend("<h3 class=\"totale\" id=\""+id+"\">Montant total : "+tampon+"€<button class=\"payer\">Payer</button></h3>");
+        }
     }
-
-
-    /* *********************************Sidebar************************************************************* */
+    
+    /* *********************************Sidebar fonction ouvrir/fermer************************************** */
+    
     function openRightMenu() {
         document.getElementById("rightMenu").style.display = "block";
     }
@@ -76,3 +105,33 @@
     function closeRightMenu() {
         document.getElementById("rightMenu").style.display = "none";
     }
+    
+    /* *********************************Formulaire pour ajouter un article********************************** */
+    
+    document.getElementById('button').addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+    });
+    
+    document.querySelector('.close').addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "none";
+    });
+    
+    /* *********************************Formulaire charger une image**************************************** */
+    
+    $(window).load(function(){
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#recupImg').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#displayImg").change(function(){
+            readURL(this);
+        });
+    });
