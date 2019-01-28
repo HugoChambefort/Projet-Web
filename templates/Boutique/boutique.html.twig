@@ -10,7 +10,7 @@
     
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-
+{# *********************************Sidebar Panier****************************************************** #}
 
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="rightMenu">
   <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
@@ -23,7 +23,34 @@
   <button class="w3-button w3-grey w3-xxlarge w3-right" onclick="openRightMenu()">&#9776;</button>
 </div>
 
+{# *********************************Add article********************************************************* #}
 
+<a href="#" id="button" class="button">Add Article</a>
+
+<div class="bg-modal">
+	<div class="modal-contents">
+        <button class="close">+</button>
+        <h1 style="margin-left:20px;">Ajout d'un nouvel article</h1>
+		<form id="formAddArticle" action="">
+            <label for="displayImg">Photo de l'article</label>
+            <input type="file" id="displayImg" style="margin-bottom:20px;">
+            <img id="recupImg" src="#" alt="Votre image" style="height:10%; width:auto;">
+			<input  class="inputCss" type="text" placeholder="Nom de l'article">
+            <label for="exampleFormControlSelect2">Catégorie</label>
+			<select class="form-control inputCss" id="exampleFormControlSelect2" style="width:50%;">
+                <option selected>Choisisez</option>
+                    <option value="value2">Polo</option>
+                    <option value="value3">Pull</option>
+                    <option value="value4">Bracelet</option>
+            </select>
+            <input type="text" class="inputCss" placeholder="Descriptions">
+            <input type="number" class="inputCss" placeholder="Prix">
+			<a href="#" class="button inputCss">Submit</a>
+		</form>
+    </div>    
+</div>
+{# *********************************Meilleurs ventes**************************************************** #}
+   
     <div class="ventesDeLaSemaine">
         <h1 class="titreM">Meilleurs ventes de la semaine</h1>
 
@@ -42,6 +69,9 @@
             </div>
         </div>
     </div>
+
+
+{# *********************************Articles à vendre*************************************************** #}
 
     <div class="articleAV">
         <div class="imgAV test">
@@ -82,5 +112,4 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset ('js/scriptBoutique.js') }}"></script>
 {% endblock %}
