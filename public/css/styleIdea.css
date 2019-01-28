@@ -1,7 +1,12 @@
 
-.txtnav{
-    color: #ffffff;
+body{
+    background-color: rgb(52,58,64);
 }
+
+a, a:hover {
+    color: white;
+}
+
 .txtbtn{
     font-size: 1em;
 }
@@ -12,9 +17,7 @@
     height: 200px;
     overflow: scroll;
 }
-a, a:hover{
-    color: #ffffff;
-}
+
 
 #uncomplete{
     color: #ff0000;

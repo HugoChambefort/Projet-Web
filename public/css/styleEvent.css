@@ -1,5 +1,14 @@
-.description{
-    width:70%;
+
+body{
+    background-color: rgb(52,58,64);
+}
+
+a, a:hover {
+    color: white;
+}
+
+.description {
+    width: 70%;
     height: 100px;
 }
 .txtnav{

@@ -116,13 +116,14 @@
         .imgText{
             margin-bottom: 2%;
         }
-    
-    /* Ordre de taille des divs
-    
-        articleAV
-        
-            imgAV test
+/* ******************************Style de la page**************************** */
 
-                imgText
-    
-    */
+body{
+     background-color: rgb(52,58,64);
+ }
+ div{
+     color: white;
+ }
+a, a:hover {
+    color: white;
+}
