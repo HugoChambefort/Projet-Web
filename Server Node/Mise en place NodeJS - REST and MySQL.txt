@@ -1,0 +1,116 @@
+Mise en place NodeJS - REST and MySQL
+---------------------------------------------------------
+
+initialisation nodeJS API
+--------------------------
+cd /var/nodeAPI/
+npm init
+
+_________________________________________________________
+Creation de la BDD
+---------------------------------------------------------
+CREATE DATABASE BDEWEB;
+
+USE BDEWEB;
+
+CREATE TABLE IF NOT EXISTS centres (
+	id_lieu INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	centre VARCHAR(50)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS users (
+	id_user INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	id_lieu INT UNSIGNED NOT NULL,
+	nom VARCHAR(50) NOT NULL,
+	prenom VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	privilege INT UNSIGNED NOT NULL,
+	CONSTRAINT fk_centres_users FOREIGN KEY (id_lieu) REFERENCES centres(id_lieu)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS evenements (
+	id_event INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	id_lieu INT UNSIGNED NOT NULL,
+	priceEvent FLOAT NOT NULL,
+	dateEvent VARCHAR(50) NOT NULL,
+	nomEvent VARCHAR(50) NOT NULL,
+	descEvent TEXT NOT NULL,
+	CONSTRAINT fk_centres_evenement FOREIGN KEY (id_lieu) REFERENCES centres(id_lieu)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS idees (
+	id_idee INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_user INT UNSIGNED NOT NULL,
+	nomIdee VARCHAR(50) NOT NULL,
+	descIdee TEXT NOT NULL,
+	CONSTRAINT fk_users_idees FOREIGN KEY (id_user) REFERENCES users(id_user)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS images (
+	id_images INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_user INT UNSIGNED NOT NULL,
+	pathImage VARCHAR(50) NOT NULL,
+	CONSTRAINT fk_users_images FOREIGN KEY (id_user) REFERENCES users(id_user)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS articles (
+	id_article INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_images INT UNSIGNED NOT NULL,
+	nomArticle VARCHAR(50) NOT NULL,
+	priceArticle FLOAT NOT NULL,
+	categorie VARCHAR(50) NOT NULL,
+	descArticle TEXT NOT NULL,
+	CONSTRAINT fk_images_articles FOREIGN KEY (id_images) REFERENCES images(id_images)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS commentaire (
+	id_commentaire INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_images INT UNSIGNED NOT NULL,
+	id_user INT UNSIGNED NOT NULL,
+	comImage TEXT NOT NULL,
+	CONSTRAINT fk_images_commentaire FOREIGN KEY (id_images) REFERENCES images(id_images),
+	CONSTRAINT fk_users_commentaire FOREIGN KEY (id_user) REFERENCES users(id_user)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS inscrire (
+	id_user INT UNSIGNED NOT NULL,
+	id_event INT UNSIGNED NOT NULL,
+	CONSTRAINT fk_users_inscrire FOREIGN KEY (id_user) REFERENCES users(id_user),
+	CONSTRAINT fk_event_inscrire FOREIGN KEY (id_event) REFERENCES evenements(id_event),
+	CONSTRAINT PK_inscription PRIMARY KEY (id_user,id_event)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS acheter (
+	id_user INT UNSIGNED NOT NULL,
+	id_article INT UNSIGNED NOT NULL,
+	CONSTRAINT fk_users_acheter FOREIGN KEY (id_user) REFERENCES users(id_user),
+	CONSTRAINT fk_article_acheter FOREIGN KEY (id_article) REFERENCES articles(id_article)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS liker (
+	id_idee INT UNSIGNED NOT NULL,
+	id_user INT UNSIGNED NOT NULL,
+	CONSTRAINT fk_users_liker FOREIGN KEY (id_user) REFERENCES users(id_user),
+	CONSTRAINT fk_idee_liker FOREIGN KEY (id_idee) REFERENCES idees(id_idee),
+	CONSTRAINT PK_inscription PRIMARY KEY (id_user,id_idee)
+)
+ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS afficher (
+	id_images INT UNSIGNED NOT NULL,
+	id_event INT UNSIGNED NOT NULL,
+	CONSTRAINT fk_images_afficher FOREIGN KEY (id_images) REFERENCES images(id_images),
+	CONSTRAINT fk_event_afficher FOREIGN KEY (id_event) REFERENCES evenements(id_event)
+)
+ENGINE=INNODB;
+
