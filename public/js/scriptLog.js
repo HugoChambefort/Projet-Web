@@ -1,5 +1,9 @@
 /**
  * connection
+ * check if an input is empty
+ * remove the error message
+ * send an ajax request to get user info
+ * set the user info to cookies
  */
 function getUserInfoC()
 {
@@ -46,6 +50,10 @@ function getUserInfoC()
 
 /**
  * inscription
+ * check if an input is empty
+ * remove the error message
+ * check if the email and the password are available
+ * send ajax request to post a new user
  */
 function getUserInfoI()
 {

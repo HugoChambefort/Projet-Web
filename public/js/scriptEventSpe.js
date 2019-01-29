@@ -5,6 +5,9 @@ if(window.addEventListener){
 }
 
 function initEvent(){
+    /**
+     * display event info
+     */
 
     $("#title").prepend($.cookie("eventTitle"));
     $("#description").prepend($.cookie("eventDesc"));
@@ -15,6 +18,9 @@ function initEvent(){
 }
 
 function displayBtn(){
+    /**
+     * shoose button
+     */
     if ($.cookie("userRole") == 2){
         var button = "<a href=\'events\'><button id=\'report\' onclick=report()>Signaler</button></a>"
     } else if($.cookie("userRole") == 1){
@@ -26,6 +32,9 @@ function displayBtn(){
 }
 
 function report(){
+    /**
+     * remove the event from the BDD
+     */
     var send = "idEvent=" + $.cookie("eventId")
     $.ajax({
         url: 'http://10.131.128.250:3003/supperevent/',
@@ -38,6 +47,9 @@ function report(){
 }
 
 function remove(){
+    /**
+     * remove the event from the BDD
+     */
     var send = "idEvent=" + $.cookie("eventId")
     $.ajax({
         url: 'http://10.131.128.250:3003/supperevent/',
@@ -50,6 +62,9 @@ function remove(){
 }
 
 function inscrire(){
+    /**
+     * add an inscription to the BDD
+     */
     var myJSON = {user:{idUser: $.cookie("userId"), idEvent: $.cookie("eventId")}}
     console.log(myJSON);
     $.ajax({
@@ -63,6 +78,9 @@ function inscrire(){
 }
 
 function displayImg(){
+    /**
+     * display all images about this event from the BDD
+     */
     var send = "idEvent="+ $.cookie("userId")
     $.ajax({
         url: 'http://10.131.128.250:3003/imagesEvent/',

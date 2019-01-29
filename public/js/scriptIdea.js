@@ -10,6 +10,7 @@ if(window.addEventListener){
 function initIdees(){
     /**
      * display "add idea" form to student and cesi
+     * get all ideas from bdd with ajax request
      * display all ideas from bdd
      */
     displayForm();
@@ -21,54 +22,45 @@ function initIdees(){
         success:function (data) {
             console.log(data);
             if(data.length){
-                console.log("ui");
                 console.log(data.length);
                 for(var i = 0; i< data.length; i++){
                     console.log(data[i]['id_idee'] +  " - " + data[i]['nomIdee'] + " - " + data[i]['email']);
                     console.log(data[i]['descIdee']);
                     displayIdee(data[i]['id_idee'], data[i]['nomIdee'].trim(), data[i]['descIdee'].trim(), data[i]['email']);
-                    id = data.length;
-
+                    id = data[data.length - 1]['id_idee'];
                 }
             }else{
-                console.log("nope");
+                console.log("get void");
             }
         }
     });
 }
 
 function displayIdee(id, title, description, email){
-    var button;
+    var button = "";
     /**
      * shoose button to like an idea or change an idea to event
+     * display all ideas
      */
     if ($.cookie("userRole") == "1"){
         console.log( $.cookie("userRole"));
-        button = "onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', \'"+email+"\');\" class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a>";
-    }else {
-        button = "onclick=addLike(" + id +",\"" + $.cookie("useremail") +"\")  class=\"btn btn-primary like\">Voter pour cette idée";
+        button = "<button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', \'"+email+"\');\" class=\"btn btn-primary like txtbtn\"><a href='#top'>Choisir cette idée pour un évenement<br>(Validez cette idée en haut de page)</a></button>";
+    }else if ($.cookie("userRole") == "0" || $.cookie("userRole") == "2"){
+        button = "<button id=\'" + id + "\' onclick=addLike(" + id +",\"" + $.cookie("useremail") +"\")  class=\"btn btn-primary like\">Voter pour cette idée</button>";
     }
-
-    /**
-     * display idea
-     */
     $(".idees").prepend("<div class=\"card idee\" id=" + id + "-" + id +" >" +
     "                               <div class=\"card-body\n\">" +
     "                                   <h5 class=\"card-title\">" + title + "</h5>" +
     "                                   <p class=\"card-text scroll\">" + description + "</p>" +
-    "                                   <button id=\'" + id + "\' " + button + "</button>" +
+    "                                   "+ button +
     "                               </div>" +
     "                           </div>");
-
-
 }
 
 function displayForm(){
     /**
      * add "add idea" form to student and cesi
      */
-    console.log( $.cookie("userRole"));
-
     if ($.cookie("userRole") == "0"){
         $("#formulaire").prepend("<div class=\"pos-f-t\">\n" +
             "                <div class=\"collapse\" id=\"navbarToggleExternalContent\">\n" +
@@ -90,7 +82,7 @@ function displayForm(){
 }
 function displayFormBde(id, title, description, email){
     /**
-     * display "add event" form to bde
+     * display "add event" to bde
      */
     if ($.cookie("userRole") == "1"){
         $("#formulaire").prepend("<div class=\"pos-f-t \" id=\'form" + id + "\'>\n" +
@@ -112,7 +104,6 @@ function displayFormBde(id, title, description, email){
             "                </nav><br>\n" +
             "            </div>");
     }
-
 }
 
 function reset()
@@ -128,14 +119,11 @@ function addIdea()
     if(document.getElementById("title").value &&  document.getElementById("description").value){
         /**
          * remove error message
-         * display new idea
          * add idea in bdd
+         * display new idea
          * reset form
          */
         $("#uncomplete").empty();
-        displayIdee(id, document.getElementById("title").value, document.getElementById("description").value, $.cookie("useremail"));
-        id++;
-
         var myJSON = {user:{idUser: $.cookie("userId"), titre: document.getElementById("title").value, description: document.getElementById("description").value}}
         $.ajax({
             url: 'http://10.131.128.250:3003/nouvelleidee/',
@@ -143,11 +131,12 @@ function addIdea()
             data: myJSON,
             success:function (data) {
                 console.log(data);
+                id++;
+                displayIdee(id, document.getElementById("title").value, document.getElementById("description").value, $.cookie("useremail"));
             }
         });
         reset();
         console.log(id);
-
     }else{
         /**
          * display error message
@@ -157,21 +146,20 @@ function addIdea()
     }
 }
 
-function addLike(id, email) {
+function addLike(id) {
     /**
      * change "like" button to disable
      * add like in bdd
-     * @type {boolean}
      */
-    document.getElementById(id).disabled = true;
-    console.log(id + " - "+ $.cookie("userId"));
     var myJSON = {user:{idIdee: id, idUser: $.cookie("userId")}}
     $.ajax({
-        url: 'http://10.131.128.250:3003/liker/'/*'http://10.131.131.41:3003/test/'*/,
+        url: 'http://10.131.128.250:3003/liker/',
         method: 'POST',
         data: myJSON,
         success:function (data) {
             console.log(data);
+            document.getElementById(id).disabled = true;
+            console.log(id + " - "+ $.cookie("userId"));
         }
     });
 }
@@ -179,10 +167,11 @@ function addLike(id, email) {
 function addEvent(id, email) {
     if(document.getElementById("title").value && document.getElementById("description").value && document.getElementById("date").value && document.getElementById("prix").value){
         /**
-         * send values
+         * send event to bdd
+         * send email
+         * remove idea
+         * remove form
          */
-        //send mail
-        //remove idea from bdd
         var myJSON = {user:{idIdee: id, idUser: $.cookie("userId"), titre: document.getElementById("title").value,
                     description: document.getElementById("description").value,
                     date: document.getElementById("date").value,
@@ -193,17 +182,13 @@ function addEvent(id, email) {
             data: myJSON,
             success:function (data) {
                 console.log(data);
-
+                var link = "mailto:" + email + "?cc=&subject=Ajout d'événement&body=Bonjour, le BDE de ton école a selectionné ton idée "+ document.getElementById("title").value + " pour en faire une manifestation à laquelle tu pourras participer le "+ document.getElementById("date").value+ ", pour un prix de "+ document.getElementById("prix").value+"€.";
+                window.location.href = link;
+                document.getElementById(id + "-" + id).remove();
+                document.getElementById("form" + id).remove();
             }
         });
-        var link = "mailto:" + email + "?cc=&subject=Ajout d'événement&body=Bonjour, le BDE de ton école a selectionné ton idée "+ document.getElementById("title").value + " pour en faire une manifestation à laquelle tu pourras participer le "+ document.getElementById("date").value+ ", pour un prix de "+ document.getElementById("prix").value+"€.";
-        window.location.href = link;
-        /**
-         * remove idea and form
-         */
-        document.getElementById(id + "-" + id).remove();
-        document.getElementById("form" + id).remove();
-    }else{
+       }else{
         /**
          * display error message
          */

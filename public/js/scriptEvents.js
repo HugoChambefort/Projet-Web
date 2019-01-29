@@ -8,8 +8,9 @@ if(window.addEventListener){
 function initEvent(){
     /**
      * display "addEvent" form to student and cesi
-     * display all events from bdd
+     * display all events of my localisation from the bdd
      */
+    displayForm();
     var send = "idUser="+ $.cookie("userId");
     $.ajax({
         url: 'http://10.131.128.250:3003/evenements/',
@@ -22,14 +23,12 @@ function initEvent(){
                 for(var i=0; i<data.length; i++){
                     displayEvent(data[i]['id_event'], data[i]['nomEvent'], data[i]['descEvent'] ,data[i]['priceEvent'], data[i]['dateEvent']);
                 }
-                id = data.length;
+                id = data[data.length]['id_event'];
             }else{
                 console.log("pas devent recup");
             }
         }
     });
-
-    displayForm();
 }
 
 
@@ -51,6 +50,9 @@ function displayEvent(id, title, description,price, date){
 }
 
 function displayForm(){
+    /**
+     * display form to BDE
+     */
 
     console.log( $.cookie("userRole"));
 
@@ -122,7 +124,7 @@ function addEvent() {
     }
 
 
-function inscription(id, email) {
+function inscription(id) {
     /**
      * change "like" button to disable
      * add like in bdd
@@ -142,6 +144,9 @@ function inscription(id, email) {
 
 
 function selectEvent(id, title, description, price, date) {
+    /**
+     * stock event info
+     */
     $.cookie("eventId", id);
     $.cookie("eventTitle", title);
     $.cookie("eventDesc", description);
