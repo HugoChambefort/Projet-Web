@@ -23,7 +23,7 @@ function initEvent(){
                 for(var i=0; i<data.length; i++){
                     displayEvent(data[i]['id_event'], data[i]['nomEvent'], data[i]['descEvent'] ,data[i]['priceEvent'], data[i]['dateEvent']);
                 }
-                id = data[data.length]['id_event'];
+                id = data[data.length - 1]['id_event'];
             }else{
                 console.log("pas devent recup");
             }
