@@ -21,15 +21,19 @@ function displayBtn(){
     /**
      * shoose button
      */
+    var buttonRemove= "";
+    var button = "";
     if ($.cookie("userRole") == 2){
-        var button = "<a href=\'events\'><button id=\'report\' onclick=report()>Signaler</button></a>"
+        buttonRemove = "<button id=\'report\' onclick=report()>Signaler</button>"
     } else if($.cookie("userRole") == 1){
-        var button = "<a href=\'events\'><button id=\'remove\' onclick=remove()>Annuler l'événement</button></a><br><br>" +
-            "<button id='csv' onclick=\"download_csv()\">Télécharger la liste des inscrits</button><br>"
+        buttonRemove = "<button id=\'remove\' onclick=remove()>Annuler l'événement</button><br><br>"
+        button = "<button id='csv' onclick=\"download_csv()\">Télécharger la liste des inscrits</button><br>"
     }else if($.cookie("userRole") == 0){
-        var button = "<button id=\'inscrire\' onclick=inscrire()>S'inscrire à cet événement</button>"
+        button = "<button id=\'inscrire\' onclick=inscrire()>S'inscrire à cet événement</button>"
     }
+    $("#btnremove").prepend(buttonRemove);
     $("#btnIns").prepend(button);
+
 }
 
 function report(){
@@ -43,6 +47,8 @@ function report(){
         data: send,
         success:function (data) {
             console.log(data);
+            var link = "mailto:bde.cesi@cesi.fr?cc=&subject=Ajout d'événement&body=Bonjour, la direction vous signal que l'événement "+ $.cookie("eventTitle")+ "qui aura lieu le "+$.cookie("eventDate")+" peut nuire a l'image de l'école.";
+            window.location.href = link;
         }
     });
 }
@@ -90,6 +96,7 @@ function download_csv() {
             console.log(data);
             if(data.length){
                 for(var i = 0; i < data.length; i++) {
+                    inscription.push([]);
                     inscription[i][0] = data[i]['nom'];
                     inscription[i][1] = data[i]['prenom'];
                     inscription[i][2] = data[i]['email'];

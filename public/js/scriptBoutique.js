@@ -1,15 +1,7 @@
 
-
-    var boutique = [[1, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ", "22", ],
-    [2, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ", "12", ],
-    [3, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ", "28",],
-    [4, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ", "5",],
-    [5, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ", "63",],
-    [6, "http://placehold.it/300x300", "Nom de l'objet", "Catégorie", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", "42",]];
-    
     /* *********************************Check si un membre du BDE est co************************************ */
     
-    if ($.cookie("userRole") == "BDE"){
+    if ($.cookie("userRole") == 1){
         
         $(".ajouterArticle").prepend("<a href=\"#\" id=\"button\" class=\"button\">Add Article</a>");
         console.log( $.cookie("userRole"));
@@ -50,7 +42,7 @@
         function displayBoutique(/*img,*/ id, titre, categorie, description, prix){
             console.log(id);
             var btn = "";
-            if ($.cookie("userRole") == "BDE"){
+            if ($.cookie("userRole") == 1){
 
                 console.log( $.cookie("userRole"));
                 btn = "<button onclick=\"delArticleBoutique("+id+")\" id=\""+id+"\">Supprimer</button>";

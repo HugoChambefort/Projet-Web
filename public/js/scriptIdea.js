@@ -124,6 +124,9 @@ function addIdea()
          * reset form
          */
         $("#uncomplete").empty();
+        id++;
+        displayIdee(id, document.getElementById("title").value, document.getElementById("description").value, $.cookie("useremail"));
+
         var myJSON = {user:{idUser: $.cookie("userId"), titre: document.getElementById("title").value, description: document.getElementById("description").value}}
         $.ajax({
             url: 'http://10.131.128.250:3003/nouvelleidee/',
@@ -131,9 +134,7 @@ function addIdea()
             data: myJSON,
             success:function (data) {
                 console.log(data);
-                id++;
-                displayIdee(id, document.getElementById("title").value, document.getElementById("description").value, $.cookie("useremail"));
-            }
+                }
         });
         reset();
         console.log(id);

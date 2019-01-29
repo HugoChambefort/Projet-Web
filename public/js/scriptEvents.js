@@ -43,7 +43,7 @@ function displayEvent(id, title, description,price, date){
                                 "        <span>"+ date +"</span>" +
                                 "        <span class=\"card-title\">Prix: " + price + "€</span><br>" +
                                 "        <a  href=\"/event_spe\">" +
-                                "           <button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', "+price+", \'"+date+"\');\" class=\"btn btn-primary like txtbtn\">Éditer l'événement</button>" +
+                                "           <button id=\'" + id + "\' onclick=\"selectEvent("+ id + ", \'"+title+"\', \'"+description+"\', "+price+", \'"+date+"\');\" class=\"btn btn-primary like txtbtn\">Détails de l'événement</button>" +
                                 "        </a>" +
                                 "   </div>" +
                                 "</div>");
