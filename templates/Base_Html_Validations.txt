@@ -77,18 +77,17 @@
 <footer style="background-color: black;">
     <div class="container">
         <div class="row">
-            <ul>
-                <li style=" color: black">
-                    <a href="/politique_confidentialite">Politique de Protection des Données Personnelles</a>
-                </li>
-                <li style=" color: black">
-                    <a href="/mentions_légales">Mentions légale</a>
-                </li>
+            
+               <a href="/politique_confidentialite">Politique de Protection des Données Personnelles</a>
 
-                <li style=" color: black">
-                    <a href="https://www.cesi.fr/">@Cesi 2019</a>
-                </li>
-            </ul>
+
+
+                <a href="/mentions_légales" style="margin-left:15px ">Mentions légales</a>
+
+
+
+                <a href="https://www.cesi.fr/" style="margin-left:15px ">@CESI 2019</a>
+            
 
         </div>
     </div>
