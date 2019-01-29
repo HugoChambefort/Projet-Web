@@ -1,13 +1,17 @@
 
 /* *************************************Sidebar Panier********************************** */
-    .titrePanier{
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 3%;
-    }
+.titrePanier{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3%;
+}
 
     .total{
+        display: flex;
         margin-left: 2%;
+    }
+    .payer{
+        margin-left: 10px;
     }
     
     .itemPanier{
@@ -15,17 +19,70 @@
         justify-content: space-around;
         margin-left: 2%;
     }
-
+    
     .boutonSupp{
         height: 3%;
         align-self: flex-end;
     }
+    
+    /* *************************************Form add Article******************************** */
 
-    #rightMenu{
-        width:25%;
-        display:none;
-        right:0;
-        background:pink;
+    .bg-modal {
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: 120%;
+        position: absolute;
+        top: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-contents {
+        height: auto;
+        width: 60%;
+        background-color: white;
+        border-radius: 4px;
+    }
+    
+    #formAddArticle{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+       
+    }
+    
+    .inputCss{
+        margin: 15px;
+    }
+
+    #submit{
+       width: 100%;
+       text-align: center;
+       text-decoration: none;
+    }
+
+    #submit:hover{
+        background: #4caf50;
+        color:white;
+    }
+
+    input {
+        margin: 15px;
+        display: block;
+        width: 50%;
+        padding: 8px;
+        border: 1px solid gray;
+        border-radius: 4px;
+    }  
+
+    .close {
+        align-self: flex-end;
+        right: 10px;
+        font-size: 42px;
+        color: #333;
+        cursor: pointer;
+        transform: rotate(45deg);
     }
     
     /* ******************************Meilleurs ventes de la semaine************************* */
@@ -51,20 +108,18 @@
         display: flex;
         flex-direction: column;
     }
-    
-    
+        
     /* ******************************Tous les articles en ventes**************************** */
 
     @media (min-width: 1050px) {
        .articleAV {
            display: flex;
-            width: 1400px;
             height: auto;
-            border: solid;
-            margin-left: 5.4%;
+            margin-left: 2%;
             margin-top: 4%
        }
        .imgAV{
+            width: 100%;
             margin: 2%;
             display: flex;
             flex-flow: row wrap;
@@ -76,13 +131,19 @@
         }
 
         .NomArticle{
-            width: 300px;
-                
+            width: 300px;     
             }
 
         #NomArticleSemaine{
             width: 200px;
             }
+
+        #rightMenu{
+            width:25%;
+            display:none;
+            right:0;
+            background:pink;
+        }
 
         }
 
@@ -90,10 +151,12 @@
         .articleAV /* La plus grosse div */ {
             width: 90%;
             height:auto;
-            border: solid;
             margin-left: 1.7%;
         }
+        
+
         .imgAV{
+            width: 100%;
             margin: 2%;
             display: flex;
             flex-flow: row wrap;
@@ -111,19 +174,29 @@
         #NomArticleSemaine{
             width: 200px;
         }
-  
+
+        #rightMenu{
+            width: 35%;
+            display:none;
+            right:0;
+            background:pink;
+        }
+
     }
-        .imgText{
+
+       .imgText{
+            width: 300px;
             margin-bottom: 2%;
         }
-/* ******************************Style de la page**************************** */
-
-body{
-     background-color: rgb(52,58,64);
- }
- div{
-     color: white;
- }
-a, a:hover {
+    
+    /* ******************************Style de la page*************************************** */
+    
+    body{
+        background-color: rgb(52,58,64);
+    }
+    div{
+        color: white;
+    }
+    a, a:hover {
     color: white;
-}
+    }
