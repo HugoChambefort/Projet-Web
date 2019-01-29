@@ -21,7 +21,7 @@ class FooterController extends AbstractController
 
 
     /**
-     * @Route ("/politique _confidentialite", name="politique")
+     * @Route ("/politique_confidentialite", name="politique")
      */
     public function indexpol()
     {
