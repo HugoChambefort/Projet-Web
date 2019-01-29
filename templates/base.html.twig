@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
+
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -15,15 +16,15 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-black " style="background-color: #000000">
-    <img src="Images/logo-Cesi_White.jpg" alt="logo cesi" width="15%" style="margin-right: 30px;" >
+    <img src="Images/logo-Cesi_White.jpg" alt="logo cesi"  style="margin-right: 30px; width: 15%" >
 
     <a class="navbar-brand" href="{{ path ('home') }}" style="margin-right: 50px; color: white;"> Accueil</a>
     <button style="background-color: rgb(93, 137, 218);" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="background-image: url('/Images/liste-déroulante.png')"></span>
     </button>
     <div class="container-fluid">
-        <div class=row">
-            <div class =" col-lg-12"  class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: right; ">
+        <div class="row">
+            <div class =" col-lg-12 collapse navbar-collapse"  id="navbarSupportedContent" style="text-align: right; ">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                     <a class="nav-link " href="{{ path ('boutique') }} ">Boutique <span class="sr-only">(current)</span></a>
@@ -32,8 +33,8 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class=row">
-            <div class =" col-lg-12"  class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: right; ">
+        <div class="row">
+            <div class =" col-lg-12 collapse navbar-collapse" id="navbarSupportedContent1" style="text-align: right; ">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link " href="{{ path ('evenement') }} ">Évenements <span class="sr-only">(current)</span></a>
@@ -42,8 +43,8 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class=row">
-            <div class =" col-lg-12"  class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: right; ">
+        <div class="row">
+            <div class =" col-lg-12 collapse navbar-collapse" id="navbarSupportedContent2" style="text-align: right; ">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link " href="{{ path ('idea') }} ">Boîte à idées <span class="sr-only">(current)</span></a>
@@ -52,8 +53,8 @@
         </div>
     </div>
     <div class="container-fluid">
-        <div class=row">
-            <div class =" col-lg-12"  class="collapse navbar-collapse" id="navbarSupportedContent" style="text-align: right; ">
+        <div class="row">
+            <div class =" col-lg-12 collapse navbar-collapse" id="navbarSupportedContent3" style="text-align: right; ">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
                         <a class="nav-link " href="{{ path ('log_sign') }} ">Login/Inscription <span class="sr-only">(current)</span></a>
@@ -75,22 +76,26 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 {% block javascripts %}{% endblock %}
 
-
-</body>
 <footer style="background-color: black;">
     <div class="container">
         <div class="row">
-            <li style=" color: black">
-                <a href="https://www.cesi.fr/politique-de-confidentialite/">Politique de Protection des Données Personnelles</a>
-            </li>
-            <li style=" color: black">
-                <a href="/mentions_légales">Mentions légale</a>
-            </li>
 
-            <li style=" color: black">
-                <a href="https://www.cesi.fr/">@Cesi 2018</a>
-            </li>
+
+                <a href="/politique_confidentialite">Politique de Protection des Données Personnelles</a>
+
+
+
+                <a href="/mentions_légales" style="margin-left:15px ">Mentions légales</a>
+
+
+
+                <a href="https://www.cesi.fr/" style="margin-left:15px ">@CESI 2019</a>
+
+
         </div>
     </div>
 </footer>
+
+</body>
+
 </html>
