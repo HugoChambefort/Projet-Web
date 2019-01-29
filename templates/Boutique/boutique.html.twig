@@ -97,42 +97,19 @@
 {# *********************************Articles à vendre*************************************************** #}
 
     <div class="articleAV">
-        <div class="imgAV test" id="Sav">
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-                <button onclick="addPannier()">Acheter</button>
-            </div>
-
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: lor Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-            </div>
-
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-            </div>
-
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-            </div>
-
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-            </div>
-
-            <div class="imgText">
-                <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
-                <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
-            </div>
-        </div>
+        <div class="imgAV test" id="Sav"></div>
             
     </div>
 
 {% endblock %}
 
 {% block javascripts %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6
+OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="{{ asset ('js/scriptBoutique.js') }}"></script>
 {% endblock %}
