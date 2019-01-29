@@ -12,43 +12,54 @@
 
 {# *********************************Sidebar Panier****************************************************** #}
 
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="rightMenu">
-  <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
-    <h1 class="titrePanier">Votre Panier</h1>
-    <div class="total"></div>
-    <div class="panier"></div>
-</div>
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" id="rightMenu">
+        <button onclick="closeRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+            <h1 class="titrePanier">Votre Panier</h1>
+            <div class="total"></div>
+            <div class="panier"></div>
+    </div>
 
-<div class="">
-  <button class="w3-button w3-grey w3-xxlarge w3-right" onclick="openRightMenu()">&#9776;</button>
-</div>
+    <div class="">
+        <button class="w3-button w3-grey w3-xxlarge w3-right" onclick="openRightMenu()">&#9776;</button>
+    </div>
 
 {# *********************************Add article********************************************************* #}
 
-<a href="#" id="button" class="button">Add Article</a>
+    <div class="ajouterArticle"></div>
+    <div class="bg-modal">
+        <div class="modal-contents">
+            <button class="close">+</button>
 
-<div class="bg-modal">
-	<div class="modal-contents">
-        <button class="close">+</button>
-        <h1 style="margin-left:20px;">Ajout d'un nouvel article</h1>
-		<form id="formAddArticle" action="">
-            <label for="displayImg">Photo de l'article</label>
-            <input type="file" id="displayImg" style="margin-bottom:20px;">
-            <img id="recupImg" src="#" alt="Votre image" style="height:10%; width:auto;">
-			<input  class="inputCss" type="text" placeholder="Nom de l'article">
-            <label for="exampleFormControlSelect2">Catégorie</label>
-			<select class="form-control inputCss" id="exampleFormControlSelect2" style="width:50%;">
-                <option selected>Choisisez</option>
-                    <option value="value2">Polo</option>
-                    <option value="value3">Pull</option>
-                    <option value="value4">Bracelet</option>
-            </select>
-            <input type="text" class="inputCss" placeholder="Descriptions">
-            <input type="number" class="inputCss" placeholder="Prix">
-			<a href="#" class="button inputCss">Submit</a>
-		</form>
-    </div>    
-</div>
+            <h1 style="margin-left:20px;">Ajout d'un nouvel article</h1>
+
+            <form id="formAddArticle">
+
+                {# <label for="displayImg">Photo de l'article</label>
+                    <input type="file" id="displayImg" name="displayImg" style="margin-bottom:20px;">
+                    <img id="recupImg" src="#" alt="Votre image" style="height:10%; width:auto;"> #}
+                    
+                <label for="nom">Nom de l'article</label>
+                    <input  class="inputCss" id="nom" type="text" placeholder="Nom de l'article">
+
+                <label for="exampleFormControlSelect2">Catégorie</label>
+                    <select class="form-control inputCss" id="exampleFormControlSelect2" style="width:50%;">
+                        <option selected>Choisisez</option>
+                            <option value="Polo">Polo</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Bracelet">Bracelet</option>
+                    </select>
+
+                <label for="description">Description</label>
+                    <input type="text" id="description" class="inputCss" placeholder="Descriptions">
+
+                <label for="prix">Prix en €</label>
+                    <input type="number" id="prix" class="inputCss" placeholder="Prix">
+                <button href="#" class="button inputCss" id="submit" onclick="addArticle(), reset()">Submit</button>
+
+            </form>
+        </div>    
+    </div>
+
 {# *********************************Meilleurs ventes**************************************************** #}
    
     <div class="ventesDeLaSemaine">
@@ -70,11 +81,23 @@
         </div>
     </div>
 
+{# *********************************Tri par catégorie*************************************************** #}
+
+    <div class="tri">
+        <label for="triCat">Trier par catégorie</label>
+                    <select class="" id="triCat">
+                        <option selected value="choisissez">Choisisez</option>
+                            <option value="Polo">Polo</option>
+                            <option value="Pull">Pull</option>
+                            <option value="Bracelet">Bracelet</option>
+                    </select>
+        <button onclick="tri()">Valider</button>
+    </div>
 
 {# *********************************Articles à vendre*************************************************** #}
 
     <div class="articleAV">
-        <div class="imgAV test">
+        <div class="imgAV test" id="Sav">
             <div class="imgText">
                 <img id="aVendre" src="http://placehold.it/300x300" alt="osef img">
                 <p class="NomArticle">Nom de l'objet à vendre <br>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Prix</p>
